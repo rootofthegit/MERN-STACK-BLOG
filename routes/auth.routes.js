@@ -24,7 +24,7 @@ router.post('/register',
                 })
             }
 
-            const {name, schoolName, email, password} = req.body
+            const {name, email, password} = req.body
 
             const candidate = await User.findOne({email})
 
@@ -33,11 +33,11 @@ router.post('/register',
             }
 
             const hashedPassword = await bcrypt.hash(password, 12)
-            const user = new User({name, schoolName, email, password: hashedPassword, openPassword: password})
+            const user = new User({name, email, password: hashedPassword, openPassword: password})
 
             await user.save()
 
-            res.status(201).json({message: 'Приколись! Ты зарегался!'})
+            res.status(201).json({message: 'Приколись - ты зарегался!'})
 
         } catch (e) {
             res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})

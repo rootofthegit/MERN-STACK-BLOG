@@ -4,6 +4,7 @@ import {LoginContainer} from "./components/Auth/Login/LoginContainer"
 import {RegisterContainer} from "./components/Auth/Register/RegisterContainer";
 import {PostsPage} from "./components/Posts/PostsPage/PostsPage";
 import {PostPageContainer} from "./components/Posts/PostPage/PostPageContainer";
+import {TestContainer} from "./components/Test/TestContainer";
 
 
 export const useRoutes = () => {
@@ -24,6 +25,10 @@ export const useRoutes = () => {
 
             <Route path="/register">
                 <RegisterContainer/>
+            </Route>
+
+            <Route path="/test">
+                <TestContainer/>
             </Route>
 
         </Switch>

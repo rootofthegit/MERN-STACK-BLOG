@@ -1,12 +1,8 @@
-import {useCallback} from 'react'
-import React from 'react';
-
-import {SnackbarProvider, useSnackbar} from 'notistack';
+import React, {useCallback} from 'react';
+import Test from "../components/Test/Test";
 
 export const useMessage = () => {
-    const {enqueueSnackbar} = useSnackbar()
-
     return useCallback(text => {
-        enqueueSnackbar('I love snacks.')
+        text && alert(text)
     }, [])
 }
