@@ -1,6 +1,0 @@
-{
-  "port": 5000,
-  "jwtSecret": "Den4ik secretniy",
-  "mongoUri": "mongodb+srv://prikolFun:16081899@cluster0.cczl1.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000"
-}
