@@ -99,6 +99,7 @@ export default function SignUp(props) {
                         color="secondary"
                         className={classes.submit}
                         onClick={props.registerHandler}
+                        disabled={props.loading}
                     >
                         Зарегистрироваться
                     </Button>

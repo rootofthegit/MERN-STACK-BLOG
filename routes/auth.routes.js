@@ -37,7 +37,7 @@ router.post('/register',
 
             await user.save()
 
-            res.status(201).json({message: 'Приколись - ты зарегался!'})
+            res.status(201).json({message: 'Приколись - ты зарегался. Теперь можешь войти!', redirect: true})
 
         } catch (e) {
             res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})

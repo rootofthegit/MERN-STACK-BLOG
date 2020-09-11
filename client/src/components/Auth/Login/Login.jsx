@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
     const classes = useStyles();
 
     return (
@@ -70,6 +70,7 @@ export default function SignIn() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={props.changeHandler}
                     />
                     <TextField
                         variant="outlined"
@@ -81,6 +82,7 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={props.changeHandler}
                     />
                     <Button
                         type="submit"
@@ -88,6 +90,8 @@ export default function SignIn() {
                         variant="contained"
                         color="secondary"
                         className={classes.submit}
+                        onClick={props.loginHandler}
+                        disabled={props.loading}
                     >
                         Войти
                     </Button>
