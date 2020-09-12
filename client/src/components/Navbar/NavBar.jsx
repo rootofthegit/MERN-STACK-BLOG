@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,6 +16,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {fade} from "@material-ui/core";
+import {AuthContext} from "../../context/AuthContext"
+
+
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -81,7 +84,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const NavBar = () => {
+
+export const NavBar = (props) => {
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -100,6 +105,7 @@ export const NavBar = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
+        props.logoutHandler()
     };
 
     const handleMobileMenuOpen = (event) => {
@@ -117,8 +123,8 @@ export const NavBar = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Выйти</MenuItem>
         </Menu>
     );
 
@@ -163,7 +169,7 @@ export const NavBar = () => {
         </Menu>
     );
     const history = useHistory()
-    const aler = () => alert("Пасхальный... хуй!")
+    const ale = () => alert("Пасхальный... xyi!")
     return (
         <div className={classes.root}>
 
@@ -175,7 +181,7 @@ export const NavBar = () => {
                     <div>
                         <NavLink to="/"><img src={logo} width={350}
                                              style={{position: "absolute", top: 1, left: 76}}/></NavLink>
-                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={aler}/>
+                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale}/>
                     </div>
                     <Typography variant="h6" className={classes.title}>
 
@@ -183,7 +189,7 @@ export const NavBar = () => {
 
                     <div className={classes.grow}/>
 
-                    <div hidden={false}>
+                    <div hidden={props.isAuthenticated}>
                         <Button size="large" color="default" startIcon={<AccountCircle/>} onClick={() => {
                             history.push("/login")
                         }}>
@@ -201,28 +207,22 @@ export const NavBar = () => {
 
                         </Button>
                     </div>
-                    <div hidden={true}>
+                    <div hidden={!props.isAuthenticated}>
                         <div className={classes.sectionDesktop}>
-                            <IconButton aria-label="show 4 new mails" color="default">
+                            <IconButton color="default">
                                 <Badge badgeContent={4} color="secondary">
                                     <MailIcon/>
                                 </Badge>
                             </IconButton>
-                            <IconButton aria-label="show 17 new notifications" color="default">
+                            <IconButton color="default">
                                 <Badge badgeContent={17} color="secondary">
                                     <NotificationsIcon/>
                                 </Badge>
                             </IconButton>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="default"
-                            >
-                                <AccountCircle/>
-                            </IconButton>
+                            <Button size="large" color="default" startIcon={<AccountCircle/>}
+                                    onClick={handleProfileMenuOpen}>
+                                {props.userName}
+                            </Button>
                         </div>
                         <div className={classes.sectionMobile}>
                             <IconButton
@@ -239,6 +239,8 @@ export const NavBar = () => {
 
                 </Toolbar>
             </AppBar>
+            {renderMobileMenu}
+            {renderMenu}
         </div>
     );
 }

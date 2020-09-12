@@ -26,8 +26,7 @@ export const LoginContainer = () => {
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
-            auth.login(data.token, data.userId)
-            console.log(data.userId)
+            auth.login(data.token, data.userId, data.userName)
         } catch (e) {
         }
     }
