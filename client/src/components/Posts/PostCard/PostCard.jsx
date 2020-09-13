@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         maxWidth: 393,
     },
     media: {
-        height: 200,
+        height: 250,
     },
     marginL: {
         marginLeft: 'auto'
