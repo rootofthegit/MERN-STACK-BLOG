@@ -8,6 +8,7 @@ import SignIn from "./Login";
 
 export const LoginContainer = () => {
     const auth = useContext(AuthContext)
+    const history = useHistory()
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
@@ -30,6 +31,8 @@ export const LoginContainer = () => {
         } catch (e) {
         }
     }
-
+    if (auth.isAuthenticated===true) {
+        history.push("/")
+    }
     return <SignIn loginHandler={loginHandler} changeHandler={changeHandler} loading={loading}/>
 }

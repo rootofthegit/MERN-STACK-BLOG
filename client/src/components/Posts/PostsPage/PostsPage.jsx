@@ -10,39 +10,98 @@ export const PostsPage = () => {
     return (
         <>
             <Container maxWidth="lg">
-                <h1> AllPostsPage </h1>
                 <Grid container spacing={3}>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <PostCard/>
                     </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PostCard/>
+                    </Grid>
+
                 </Grid>
                 <BasicPagination/>
             </Container>

@@ -86,6 +86,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const NavBar = (props) => {
+    const auth = useContext(AuthContext)
+    const logoutHandler = () => {
+        auth.logout()
+        handleMenuClose()
+    }
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -105,7 +110,6 @@ export const NavBar = (props) => {
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
-        props.logoutHandler()
     };
 
     const handleMobileMenuOpen = (event) => {
@@ -124,7 +128,7 @@ export const NavBar = (props) => {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Выйти</MenuItem>
+            <MenuItem onClick={logoutHandler} >Выйти</MenuItem>
         </Menu>
     );
 
@@ -173,7 +177,7 @@ export const NavBar = (props) => {
     return (
         <div className={classes.root}>
 
-            <AppBar position="static" style={{background: "white"}}>
+            <AppBar position="static" style={{background: "white", marginBottom: 20}}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="black" aria-label="menu">
                         <Apps/>

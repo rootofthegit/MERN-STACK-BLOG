@@ -3,13 +3,15 @@ import SignUp from "./Register"
 import {useMessage} from "../../../hooks/message.hook";
 import {useHttp} from "../../../hooks/http.hook";
 import {useHistory} from "react-router-dom";
-import {Test} from "../../Test/Test";
+import {AuthContext} from "../../../context/AuthContext";
+
 
 export const RegisterContainer = () => {
+    const auth = useContext(AuthContext)
     const history = useHistory()
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
-    const [form, setForm] = useState({ name: '', email: '', password: '' })
+    const [form, setForm] = useState({name: '', email: '', password: ''})
 
     let data = {}
 
@@ -28,11 +30,13 @@ export const RegisterContainer = () => {
             data = await request('/api/auth/register', 'POST', {...form})
             message(data.message)
 
-            data.redirect?history.push("/login"):console.log("хуй!")
+            data.redirect ? history.push("/login") : console.log("хуй!")
         } catch (e) {
         }
     }
-
+    if (auth.isAuthenticated === true) {
+        history.push("/")
+    }
     return <SignUp registerHandler={registerHandler} changeHandler={changeHandler} loading={loading}/>
 
 }
