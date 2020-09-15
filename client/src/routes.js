@@ -2,9 +2,9 @@ import React from "react";
 import {Switch, Route} from 'react-router-dom'
 import {LoginContainer} from "./components/Auth/Login/LoginContainer"
 import {RegisterContainer} from "./components/Auth/Register/RegisterContainer";
-import {PostsPage} from "./components/Posts/PostsPage/PostsPage";
 import {PostPageContainer} from "./components/Posts/PostPage/PostPageContainer";
 import {TestContainer} from "./components/Test/TestContainer";
+import {PostsPageContainer} from "./components/Posts/PostsPage/PostsPageContainer";
 
 
 export const useRoutes = () => {
@@ -12,7 +12,7 @@ export const useRoutes = () => {
     return (
         <Switch>
             <Route path="/" exact>
-                <PostsPage/>
+                <PostsPageContainer/>
             </Route>
 
             <Route path="/post/:id">

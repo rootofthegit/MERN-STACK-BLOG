@@ -7,12 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-import image from "../../../aseets/images/img1.jpg"
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import {Comment} from "@material-ui/icons";
+
+import image from "../../../aseets/images/img1.jpg"
 
 
 const useStyles = makeStyles({
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     }
 });
 
-export const PostCard = () => {
+export const PostCard = (props) => {
     const classes = useStyles();
 
     return (
@@ -40,11 +40,10 @@ export const PostCard = () => {
                 />
                 <CardContent>
                     <Typography variant="subtitle2" gutterBottom color="secondary">
-                        Будни скорой помощи. Как рожают блять алкоголики и наркоманы...
+                        {props.postTitle}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        {props.shortPostText}
                     </Typography>
                 </CardContent>
             </CardActionArea>
