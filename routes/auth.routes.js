@@ -33,7 +33,7 @@ router.post('/register',
             }
 
             const hashedPassword = await bcrypt.hash(password, 12)
-            const user = new User({name, email, password: hashedPassword, openPassword: password})
+            const user = new User({name, email, password: hashedPassword})
 
             await user.save()
 

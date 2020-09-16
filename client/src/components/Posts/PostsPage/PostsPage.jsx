@@ -5,15 +5,22 @@ import Grid from "@material-ui/core/Grid";
 import BasicPagination from "../../Pagination/Pagination";
 import {Footer} from "../../Footer/Footer";
 
-export const PostsPage = (props) => {
-
+export const PostsPage = ({posts}) => {
+    if (!posts.length) {
+        return <p>Постов пока нет</p>
+    }
     return (
         <>
             <Container maxWidth="lg">
                 <Grid container spacing={4}>
-                    <Grid item xs>
-                        <PostCard postTitle={props.postTitle} shortPostText={props.shortPostText}/>
-                    </Grid>
+                    {posts.map((post) => {
+                        return (
+                            <Grid item xs key={post._id}>
+                                <PostCard postTitle={post.title} shortPostText={post.body}/>
+                            </Grid>
+                        )
+                    })}
+
                 </Grid>
                 <BasicPagination/>
             </Container>
