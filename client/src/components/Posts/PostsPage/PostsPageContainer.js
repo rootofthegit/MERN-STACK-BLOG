@@ -19,9 +19,6 @@ export const PostsPageContainer = () => {
         fetchPosts()
     }, [fetchPosts])
 
-    const postTitle = "Название поста как бы то нибыло !"
-    const shortPostText = "ullam et saepe reiciendis voluptatem adipiscinsit amet autem assumenda provident rerum culpanquis hic commodi nesciunt rem tenetur doloremque ipsam iurenquis sunt voluptatem rerum illo velit"
-
     if (loading) {
         return <Loader/>
     }
