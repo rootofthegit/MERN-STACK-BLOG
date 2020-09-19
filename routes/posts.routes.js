@@ -1,4 +1,5 @@
 const {check, validationResult} = require('express-validator');
+const upload = require('../middleware/upload')
 
 const {Router} = require('express')
 const Post = require('../models/Post')
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
 
 ///api/posts/newpost
 
-router.post('/addnewpost',
+router.post('/addnewpost', upload.single(),
     [
         check('postName', 'Введите название поста').isLength({min: 1}),
         check('postText', 'Минимальная длинна поста 1 символ').isLength({min: 1})
@@ -41,9 +42,9 @@ router.post('/addnewpost',
                 })
             }
 
-            const {postName, postText} = req.body
+            const {image, postName, postText} = req.body
 
-            const post = new Post({title:postName, body:postText})
+            const post = new Post({title:postName, postText:postText, imageSrc: image ? image.path : ''})
 
             await post.save()
 

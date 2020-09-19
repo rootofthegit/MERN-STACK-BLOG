@@ -9,6 +9,8 @@ app.use(express.json({extended: true}))
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/posts', require('./routes/posts.routes'))
+app.use('/uploads', express.static('uploads'))
+
 
 const PORT = config.get('port') || 5000
 

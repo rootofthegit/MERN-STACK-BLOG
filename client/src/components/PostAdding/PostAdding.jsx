@@ -45,7 +45,7 @@ export default function PostAdding(props) {
                 <Typography component="h1" variant="h5">
                     Добавление нового поста
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={props.postAddingHandler} id="formWithFile">
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -74,8 +74,9 @@ export default function PostAdding(props) {
                         accept="image/*"
                         className={classes.input}
                         id="contained-button-file"
-                        multiple
+                        name="postImage"
                         type="file"
+                        onChange={props.addImgHandler}
                     />
                     <label htmlFor="contained-button-file">
                         <Button variant="contained" color="primary" component="span">
@@ -89,7 +90,7 @@ export default function PostAdding(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={props.postAddingHandler}
+                        /*onClick={props.postAddingHandler}*/
                         disabled={props.loading}
                     >
                         Добавить новый пост

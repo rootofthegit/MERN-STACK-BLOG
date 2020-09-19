@@ -2,7 +2,8 @@ const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema ({
     title: {type: String, required: true},
-    body: {type: String, required: true},
+    postText: {type: String, required: true},
+    imageSrc: {type: String},
     date: {type: Date, default: Date.now},
     clicks: {type: Number, default: 0}
 })

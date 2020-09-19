@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
 import rofl from '../../aseets/images/rofl.gif'
-import {AccountCircle, AddCircle, Apps} from "@material-ui/icons";
+import {AccountCircle, AddCircle, Apps, PostAdd} from "@material-ui/icons";
 import {NavLink, useHistory} from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import MailIcon from '@material-ui/icons/Mail';
@@ -222,6 +222,11 @@ export const NavBar = (props) => {
                                 <Badge badgeContent={17} color="secondary">
                                     <NotificationsIcon/>
                                 </Badge>
+                            </IconButton>
+                            <IconButton color="default" onClick={() => {
+                                history.push("/addpost")
+                            }}>
+                                    <PostAdd/>
                             </IconButton>
                             <Button size="large" color="default" startIcon={<AccountCircle/>}
                                     onClick={handleProfileMenuOpen}>
