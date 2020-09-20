@@ -45,38 +45,38 @@ export default function PostAdding(props) {
                 <Typography component="h1" variant="h5">
                     Добавление нового поста
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={props.postAddingHandler} id="formWithFile">
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="postName"
-                        label="Название поста"
-                        name="postName"
-                        autoComplete="postName"
-                        autoFocus
-                        onChange={props.changeHandler}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="postText"
-                        label="Текст поста"
-                        type="text"
-                        id="postText"
-                        autoComplete="postText"
-                        onChange={props.changeHandler}
-                    />
+                <form className={classes.form} onSubmit={props.onSubmitHandler}>
+                    {/*<TextField*/}
+                    {/*    variant="outlined"*/}
+                    {/*    margin="normal"*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    id="postName"*/}
+                    {/*    label="Название поста"*/}
+                    {/*    name="postName"*/}
+                    {/*    autoComplete="postName"*/}
+                    {/*    autoFocus*/}
+                    {/*    // onChange={props.changeTextHandler}*/}
+                    {/*/>*/}
+                    {/*<TextField*/}
+                    {/*    variant="outlined"*/}
+                    {/*    margin="normal"*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    name="postText"*/}
+                    {/*    label="Текст поста"*/}
+                    {/*    type="text"*/}
+                    {/*    id="postText"*/}
+                    {/*    autoComplete="postText"*/}
+                    {/*    onChange={props.changeTextHandler}*/}
+                    {/*/>*/}
                     <input
-                        accept="image/*"
+                        accept="*/*"
                         className={classes.input}
                         id="contained-button-file"
                         name="postImage"
                         type="file"
-                        onChange={props.addImgHandler}
+                        onChange={props.onChangeFileHandler}
                     />
                     <label htmlFor="contained-button-file">
                         <Button variant="contained" color="primary" component="span">
@@ -90,7 +90,7 @@ export default function PostAdding(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        /*onClick={props.postAddingHandler}*/
+                        // onClick={props.onSubmitHandler}
                         disabled={props.loading}
                     >
                         Добавить новый пост

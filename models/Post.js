@@ -9,3 +9,7 @@ const schema = new Schema ({
 })
 
 module.exports = model('Post', schema)
+
+
+
+
