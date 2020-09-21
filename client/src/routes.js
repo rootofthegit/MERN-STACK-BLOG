@@ -16,7 +16,7 @@ export const useRoutes = () => {
                 <PostsPageContainer/>
             </Route>
 
-            <Route path="/post/:id">
+            <Route path="/posts/:id">
                 <PostPageContainer/>
             </Route>
             <Route path="/addpost">

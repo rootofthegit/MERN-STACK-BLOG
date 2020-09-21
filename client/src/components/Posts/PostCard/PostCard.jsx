@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import {Comment} from "@material-ui/icons";
+import {useHistory} from "react-router-dom"
 
 const useStyles = makeStyles({
     root: {
@@ -26,15 +27,18 @@ const useStyles = makeStyles({
 
 export const PostCard = (props) => {
     const classes = useStyles();
-    const shortTitle = (props.postTitle.length>81)?(`${props.postTitle.substring(0, 81)}...`):(props.postTitle)
-    const shortText = (props.postText.length>289)?(`${props.postText.substring(0, 289)}...`):(props.postText)
+    const shortTitle = (props.postTitle.length > 81) ? (`${props.postTitle.substring(0, 81)}...`) : (props.postTitle)
+    const shortText = (props.postText.length > 289) ? (`${props.postText.substring(0, 289)}...`) : (props.postText)
+    const history = useHistory()
     return (
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea onClick={() => {
+                history.push(`posts/${props.postId}`)
+            }}>
                 <CardMedia
                     className={classes.media}
                     image={props.imageSrc}
-                    title="Contemplative Reptile"
+                    title={shortTitle}
                 />
                 <CardContent>
                     <Typography variant="subtitle2" gutterBottom color="secondary">
@@ -57,9 +61,11 @@ export const PostCard = (props) => {
                 </IconButton>
 
                 <Button size="large" color="default" className={classes.marginL}
-                             >
-                         Подробнее...
-                     </Button>
+                        onClick={() => {
+                            history.push(`posts/${props.postId}`)
+                        }}>
+                    Подробнее...
+                </Button>
             </CardActions>
 
         </Card>

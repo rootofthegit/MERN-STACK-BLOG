@@ -13,16 +13,16 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         res.json(post)
     } catch (e) {
-        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
+        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})
     }
 })
 
-///api/posts/newpost
+///api/posts/add
 
 router.post('/add', async (req, res) => {
 
