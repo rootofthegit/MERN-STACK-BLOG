@@ -16,7 +16,7 @@ export const PostsPage = ({posts}) => {
                     {posts.map((post) => {
                         return (
                             <Grid item xs key={post._id}>
-                                <PostCard postTitle={post.title} shortPostText={post.body}/>
+                                <PostCard postTitle={post.title} shortPostText={post.postText} imageSrc={post.imageSrc}/>
                             </Grid>
                         )
                     })}

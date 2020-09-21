@@ -22,5 +22,6 @@ export const PostsPageContainer = () => {
     if (loading) {
         return <Loader/>
     }
+
     return ( <> {!loading && <PostsPage posts = {posts} />} </> )
 }

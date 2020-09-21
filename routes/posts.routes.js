@@ -24,24 +24,22 @@ router.get('/:id', async (req, res) => {
 
 ///api/posts/newpost
 
-router.post('/add', async(req, res) => {
-    if (req.files === null) {
-        return res.status(400).json({msg: 'No file uploaded'});
-    }
+router.post('/add', async (req, res) => {
 
     const file = req.files.file;
     const postName = req.body.postName
     const postText = req.body.postText
-
 
     file.mv(`client/public/uploads/${file.name}`, err => {
         if (err) {
             console.error(err);
             return res.status(500).send(err);
         }
-
         res.json({fileName: file.name, filePath: `/uploads/${file.name}`, postName: postName, postText: postText});
     });
+
+    const post = new Post({title: postName, postText: postText, imageSrc: `/uploads/${file.name}`})
+    await post.save()
 });
 
 

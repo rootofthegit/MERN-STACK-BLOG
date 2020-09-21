@@ -29,13 +29,12 @@ const useStyles = makeStyles({
 
 export const PostCard = (props) => {
     const classes = useStyles();
-
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={image}
+                    image={props.imageSrc}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
