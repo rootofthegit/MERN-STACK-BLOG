@@ -30,6 +30,9 @@ router.post('/add', async(req, res) => {
     }
 
     const file = req.files.file;
+    const postName = req.body.postName
+    const postText = req.body.postText
+
 
     file.mv(`client/public/uploads/${file.name}`, err => {
         if (err) {
@@ -37,7 +40,7 @@ router.post('/add', async(req, res) => {
             return res.status(500).send(err);
         }
 
-        res.json({fileName: file.name, filePath: `/uploads/${file.name}`});
+        res.json({fileName: file.name, filePath: `/uploads/${file.name}`, postName: postName, postText: postText});
     });
 });
 

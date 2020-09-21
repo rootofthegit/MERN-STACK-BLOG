@@ -45,31 +45,31 @@ export default function PostAdding(props) {
                 <Typography component="h1" variant="h5">
                     Добавление нового поста
                 </Typography>
-                <form className={classes.form} onSubmit={props.onSubmitHandler}>
-                    {/*<TextField*/}
-                    {/*    variant="outlined"*/}
-                    {/*    margin="normal"*/}
-                    {/*    required*/}
-                    {/*    fullWidth*/}
-                    {/*    id="postName"*/}
-                    {/*    label="Название поста"*/}
-                    {/*    name="postName"*/}
-                    {/*    autoComplete="postName"*/}
-                    {/*    autoFocus*/}
-                    {/*    // onChange={props.changeTextHandler}*/}
-                    {/*/>*/}
-                    {/*<TextField*/}
-                    {/*    variant="outlined"*/}
-                    {/*    margin="normal"*/}
-                    {/*    required*/}
-                    {/*    fullWidth*/}
-                    {/*    name="postText"*/}
-                    {/*    label="Текст поста"*/}
-                    {/*    type="text"*/}
-                    {/*    id="postText"*/}
-                    {/*    autoComplete="postText"*/}
-                    {/*    onChange={props.changeTextHandler}*/}
-                    {/*/>*/}
+                <form className={classes.form} onSubmit={props.onSubmitHandler} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="postName"
+                        label="Название поста"
+                        name="postName"
+                        autoComplete="postName"
+                        autoFocus
+                        onChange={props.changeTextHandler}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="postText"
+                        label="Текст поста"
+                        type="text"
+                        id="postText"
+                        autoComplete="postText"
+                        onChange={props.changeTextHandler}
+                    />
                     <input
                         accept="*/*"
                         className={classes.input}
@@ -90,7 +90,6 @@ export default function PostAdding(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        // onClick={props.onSubmitHandler}
                         disabled={props.loading}
                     >
                         Добавить новый пост

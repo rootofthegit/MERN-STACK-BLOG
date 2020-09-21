@@ -10,8 +10,8 @@ export const PostAddingContainer = () => {
     const [filename, setFilename] = useState('')
     const [message, setMessage] = useState('')
 
-    const changeTextHandler = () => {
-
+    const changeTextHandler = (e) => {
+        setForm({...form, [e.target.name]: e.target.value})
     }
 
     const onChangeFileHandler = e => {
@@ -19,10 +19,13 @@ export const PostAddingContainer = () => {
         setFilename(e.target.files[0].name)
     }
 
+    const { postText, postName } = form
     const onSubmitHandler = async e => {
         e.preventDefault()
         const formData = new FormData()
         formData.append('file', file)
+        formData.append('postText', postText)
+        formData.append('postName', postName)
 
         try {
             const res = await axios.post('/api/posts/add', formData, {
@@ -73,7 +76,7 @@ export const PostAddingContainer = () => {
     // }, [error, message, clearError])
 
 
-    return <PostAdding /*changeTextHandler={changeTextHandler}*/
+    return <PostAdding changeTextHandler={changeTextHandler}
         onChangeFileHandler={onChangeFileHandler}
         onSubmitHandler={onSubmitHandler}
         loading={loading}/>
