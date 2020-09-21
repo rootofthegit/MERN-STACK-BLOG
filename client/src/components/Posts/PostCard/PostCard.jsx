@@ -12,9 +12,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import {Comment} from "@material-ui/icons";
 
-import image from "../../../aseets/images/img1.jpg"
-
-
 const useStyles = makeStyles({
     root: {
         maxWidth: 393,
@@ -29,6 +26,8 @@ const useStyles = makeStyles({
 
 export const PostCard = (props) => {
     const classes = useStyles();
+    const shortTitle = (props.postTitle.length>81)?(`${props.postTitle.substring(0, 81)}...`):(props.postTitle)
+    const shortText = (props.postText.length>289)?(`${props.postText.substring(0, 289)}...`):(props.postText)
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -39,10 +38,10 @@ export const PostCard = (props) => {
                 />
                 <CardContent>
                     <Typography variant="subtitle2" gutterBottom color="secondary">
-                        {props.postTitle}
+                        {shortTitle}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.shortPostText}
+                        {shortText}
                     </Typography>
                 </CardContent>
             </CardActionArea>

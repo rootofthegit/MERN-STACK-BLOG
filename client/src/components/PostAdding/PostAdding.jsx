@@ -59,17 +59,28 @@ export default function PostAdding(props) {
                         onChange={props.changeTextHandler}
                     />
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="postText"
-                        label="Текст поста"
-                        type="text"
                         id="postText"
-                        autoComplete="postText"
+                        label="Текст поста"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        name="postText"
+                        fullWidth
                         onChange={props.changeTextHandler}
+                        margin="normal"
                     />
+                    {/*<TextField*/}
+                    {/*    variant="outlined"*/}
+                    {/*    margin="normal"*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    name="postText"*/}
+                    {/*    label="Текст поста"*/}
+                    {/*    type="text"*/}
+                    {/*    id="postText"*/}
+                    {/*    autoComplete="postText"*/}
+                    {/*    onChange={props.changeTextHandler}*/}
+                    {/*/>*/}
                     <input
                         accept="*/*"
                         className={classes.input}

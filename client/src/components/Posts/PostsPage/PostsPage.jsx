@@ -9,6 +9,7 @@ export const PostsPage = ({posts}) => {
     if (!posts.length) {
         return <p>Постов пока нет</p>
     }
+
     return (
         <>
             <Container maxWidth="lg">
@@ -16,7 +17,7 @@ export const PostsPage = ({posts}) => {
                     {posts.map((post) => {
                         return (
                             <Grid item xs key={post._id}>
-                                <PostCard postTitle={post.title} shortPostText={post.postText} imageSrc={post.imageSrc}/>
+                                <PostCard postTitle={post.title} postText={post.postText} imageSrc={post.imageSrc}/>
                             </Grid>
                         )
                     })}
