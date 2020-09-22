@@ -7,18 +7,19 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
 import rofl from '../../aseets/images/rofl.gif'
-import {AccountCircle, AddCircle, Apps, PostAdd} from "@material-ui/icons";
+import {AccountCircle, AddCircle, Apps, Favorite, Grade, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
 import {NavLink, useHistory} from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MoreIcon from '@material-ui/icons/MoreVert';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import {AuthContext} from "../../context/AuthContext"
-
-
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import DirectionsIcon from '@material-ui/icons/Directions';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -40,11 +41,10 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
-        marginRight: theme.spacing(2),
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
+            marginLeft: theme.spacing(1),
             width: 'auto',
         },
     },
@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    broot: {
+        backgroundColor: "#f2f5f6",
+        marginRight: '30px'
+    }
 }));
 
 
@@ -127,8 +131,8 @@ export const NavBar = (props) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={logoutHandler} >Выйти</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Мой аккаунт</MenuItem>
+            <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
         </Menu>
     );
 
@@ -146,18 +150,18 @@ export const NavBar = (props) => {
             <MenuItem>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="secondary">
-                        <MailIcon/>
+                        <SpeakerNotes/>
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>Ответы на комменты</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon/>
+                    <Badge badgeContent={11} color="default">
+                        <Star/>
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Понравившиеся</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -168,16 +172,16 @@ export const NavBar = (props) => {
                 >
                     <AccountCircle/>
                 </IconButton>
-                <p>Profile</p>
+                <p>{props.userName}</p>
             </MenuItem>
         </Menu>
     );
     const history = useHistory()
-    const ale = () => alert("Пасхальный... xyi!")
+    const ale = () => alert("Пасхальный... xy!")
     return (
         <div className={classes.root}>
 
-            <AppBar position="static" style={{background: "white", marginBottom: 20}}>
+            <AppBar position="fixed" style={{background: "#eceff1", borderBottom: "solid #90a4ae 1px"}}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="black" aria-label="menu">
                         <Apps/>
@@ -187,17 +191,16 @@ export const NavBar = (props) => {
                                              style={{position: "absolute", top: 1, left: 76}}/></NavLink>
                         <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale}/>
                     </div>
-                    <Typography variant="h6" className={classes.title}>
-
-                    </Typography>
 
                     <div className={classes.grow}/>
 
                     <div hidden={props.isAuthenticated}>
+                    <div className={classes.sectionDesktop}>
                         <Button size="large" color="default" startIcon={<AccountCircle/>} onClick={() => {
                             history.push("/login")
                         }}>
                             Войти</Button>
+
                         <Button
                             variant="contained"
                             color="secondary"
@@ -211,22 +214,33 @@ export const NavBar = (props) => {
 
                         </Button>
                     </div>
+                    </div>
                     <div hidden={!props.isAuthenticated}>
                         <div className={classes.sectionDesktop}>
-                            <IconButton color="default">
-                                <Badge badgeContent={4} color="secondary">
-                                    <MailIcon/>
-                                </Badge>
-                            </IconButton>
-                            <IconButton color="default">
-                                <Badge badgeContent={17} color="secondary">
-                                    <NotificationsIcon/>
-                                </Badge>
-                            </IconButton>
-                            <IconButton color="default" onClick={() => {
+                            <Paper component="form" className={classes.broot}>
+                                <IconButton className={classes.iconButton} aria-label="menu">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    className={classes.input}
+                                    placeholder="Поиск"
+                                    inputProps={{ 'aria-label': 'search google maps' }}
+                                />
+                            </Paper>
+                            <IconButton color="default" title="Добавить пост" onClick={() => {
                                 history.push("/addpost")
                             }}>
-                                    <PostAdd/>
+                                <PostAdd/>
+                            </IconButton>
+                            <IconButton color="default" title="Понравившиеся">
+                                <Badge badgeContent={17} color="default">
+                                    <Star/>
+                                </Badge>
+                            </IconButton>
+                            <IconButton color="default" title="Ответы на комментарии">
+                                <Badge badgeContent={4} color="secondary">
+                                    <SpeakerNotes/>
+                                </Badge>
                             </IconButton>
                             <Button size="large" color="default" startIcon={<AccountCircle/>}
                                     onClick={handleProfileMenuOpen}>
@@ -239,7 +253,7 @@ export const NavBar = (props) => {
                                 aria-controls={mobileMenuId}
                                 aria-haspopup="true"
                                 onClick={handleMobileMenuOpen}
-                                color="inherit"
+                                color="default"
                             >
                                 <MoreIcon/>
                             </IconButton>

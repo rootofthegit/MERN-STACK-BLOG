@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {Comment} from "@material-ui/icons";
+import {Comment, FavoriteBorder} from "@material-ui/icons";
 import {useHistory} from "react-router-dom"
 
 const useStyles = makeStyles({
@@ -50,13 +50,13 @@ export const PostCard = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon/>
+                <IconButton title="Like!" onClick={props.likeHandler}>
+                    <FavoriteBorder/>
                 </IconButton>
-                <IconButton aria-label="add comment">
+                <IconButton title="Добавить комментарий">
                     <Comment/>
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton title="Показать друзьям!">
                     <ShareIcon/>
                 </IconButton>
 

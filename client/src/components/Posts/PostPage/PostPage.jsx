@@ -52,7 +52,7 @@ export const PostPage = (props) => {
     const history = useHistory()
     const {title, postText, imageSrc} = props.post
 
-    return <Container maxWidth="lg">
+    return <Container maxWidth="lg" style={{marginTop: 90}}>
             <Card className={classes.root}>
                 <CardHeader
                     action={
@@ -66,7 +66,7 @@ export const PostPage = (props) => {
                 <CardMedia
                     className={classes.media}
                     image={imageSrc}
-                    title="Paella dish"
+                    title={title}
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">

@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id',async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         res.json(post)
@@ -40,6 +40,17 @@ router.post('/add', async (req, res) => {
 
     const post = new Post({title: postName, postText: postText, imageSrc: `/uploads/${file.name}`})
     await post.save()
+});
+
+router.get('like/:id', async (req, res) => {
+
+    await Post.findByIdAndUpdate(req.params.id, {likes: 1}, function (err, user) {
+
+        if (err) return console.log(err);
+        console.log("Обновленный объект", Post);
+    });
+
+    res.json({message: "Лайк принят!"});
 });
 
 
