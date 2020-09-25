@@ -1,20 +1,24 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {PostCard} from "./PostCard";
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
-import {useParams} from 'react-router-dom'
+import {AuthContext} from "../../../context/AuthContext";
 
 export const PostCardContainer = (props) => {
     const {request, loading} = useHttp()
-    const postId = useParams().id
+    const auth = useContext(AuthContext)
 
-    const likeHandler = useCallback(async () => {
-        try {
-            const fetched = await request(`/api/like/${postId}`, 'GET', null)
-            alert('fetched.message')
-        } catch (e) {
+    const likeBody = {userId: auth.userId, postId: props.postId}
+    const likeHandler = async () => {
+        if (auth.isAuthenticated) {
+            try {
+                const data = await request('/api/posts/like/', 'POST', {...likeBody})
+                alert(data.message)
+            } catch (e) {
+            }
         }
-    }, [postId, request])
+
+    }
 
     if (loading) {
         return <Loader/>

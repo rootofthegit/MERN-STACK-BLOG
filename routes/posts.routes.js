@@ -2,6 +2,7 @@ const {check, validationResult} = require('express-validator');
 
 const {Router} = require('express')
 const Post = require('../models/Post')
+const User = require('../models/User')
 const router = Router()
 
 router.get('/', async (req, res) => {
@@ -42,16 +43,33 @@ router.post('/add', async (req, res) => {
     await post.save()
 });
 
-router.get('like/:id', async (req, res) => {
+router.post('/like', async (req, res) => {
 
-    await Post.findByIdAndUpdate(req.params.id, {likes: 1}, function (err, user) {
+    const {userId, postId} = req.body
 
-        if (err) return console.log(err);
-        console.log("Обновленный объект", Post);
-    });
 
-    res.json({message: "Лайк принят!"});
+
+    // user.updateOne({email: "denis@gmail.com"}, {email: "kurbas@mail.ru"})
+    // user.save()
+
+    return res.status(201).json({message: postId})
+
+    // const userLikePostExists = await User.findOne({likedPosts: likeId})
+    //
+    // if (likeExists) {
+    //     likeExists
+    // }
+
+    // await Post.findByIdAndUpdate(req.params.id, {likes: 1}, function (err, user) {
+    //
+    //     if (err) return console.log(err);
+    //     console.log("Обновленный объект", Post);
+    // });
+    //
+    // res.json({message: "Лайк принят!"});
+
+    // const post = new Post({title: postName, postText: postText, imageSrc: `/uploads/${file.name}`})
+    // await post.save()
 });
-
 
 module.exports = router

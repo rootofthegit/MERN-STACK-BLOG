@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
@@ -18,8 +17,6 @@ import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import {AuthContext} from "../../context/AuthContext"
 import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import DirectionsIcon from '@material-ui/icons/Directions';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
