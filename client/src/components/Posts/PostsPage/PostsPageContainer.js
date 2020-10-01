@@ -2,18 +2,19 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {PostsPage} from './PostsPage'
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
+import {connect, useDispatch} from "react-redux";
+import {getPosts} from "../../../redux/actions";
 
-export const PostsPageContainer = () => {
-    const [posts, setPosts] = useState([])
-    const {loading, request} = useHttp()
+const PostsPageContainer = ({posts}) => {
+    const {loading} = useHttp()
+    const dispatch = useDispatch()
 
     const fetchPosts = useCallback(async () => {
         try {
-            const fetched = await request('/api/posts/', 'GET' )
-            setPosts(fetched)
+            dispatch(getPosts())
         } catch (e) {
         }
-    }, [request])
+    }, [])
 
     useEffect(() => {
         fetchPosts()
@@ -23,5 +24,13 @@ export const PostsPageContainer = () => {
         return <Loader/>
     }
 
-    return ( <> {!loading && <PostsPage posts = {posts} />} </> )
+    return (<> {!loading && <PostsPage posts={posts}/>} </>)
 }
+
+const mapStateToProps = state => {
+    return {
+        posts: state.posts.posts
+    }
+}
+
+export default connect(mapStateToProps, null)(PostsPageContainer)
