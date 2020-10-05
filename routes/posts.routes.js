@@ -4,6 +4,7 @@ const {Router} = require('express')
 const Post = require('../models/Post')
 const User = require('../models/User')
 const router = Router()
+const auth = require('../middleware/auth.middleware')
 
 router.get('/', async (req, res) => {
     try {
@@ -25,7 +26,7 @@ router.get('/:id', async (req, res) => {
 
 ///api/posts/add
 
-router.post('/add', async (req, res) => {
+router.post('/add', auth, async (req, res) => {
 
     const file = req.files.file;
     const postName = req.body.postName
@@ -43,26 +44,31 @@ router.post('/add', async (req, res) => {
     await post.save()
 });
 
-router.post('/like', async (req, res) => {
+router.post('/like', auth, async (req, res) => {
+    try {
+        const {postId} = req.body
+        const userId = req.user.userId
+        console.log(postId, userId)
 
-    const {userId, postId} = req.body
+        const user = await User.findById(userId)
+        const post = await Post.findById(postId)
 
-    const user = await User.findById(userId)
-    const post = await Post.findById(postId)
-
-    const likeIndex = user.likedPosts.indexOf(postId)
-    if (likeIndex !== -1) {
-        user.likedPosts.splice(likeIndex, 1)
-        --post.likes
-        await post.save()
-        await user.save()
-        return res.status(201).json({message: `Есть уже такой! но мы удалили его ${postId}`})
-    } else {
-        ++post.likes
-        await post.save()
-        user.likedPosts.push(postId)
-        await user.save()
-        return res.status(201).json({message: `Нихуя!! но мы добавили!${postId}`})
+        const likeIndex = user.likedPosts.indexOf(postId)
+        if (likeIndex !== -1) {
+            user.likedPosts.splice(likeIndex, 1)
+            --post.likes
+            await post.save()
+            await user.save()
+            return res.status(201).json({message: 'delete like'})
+        } else {
+            ++post.likes
+            await post.save()
+            user.likedPosts.push(postId)
+            await user.save()
+            return res.status(201).json({message: 'add like'})
+        }
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})
     }
 })
 

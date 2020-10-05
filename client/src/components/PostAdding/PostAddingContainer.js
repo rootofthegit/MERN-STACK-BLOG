@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {useHttp} from "../../hooks/http.hook"
 import PostAdding from "./PostAdding"
 import axios from 'axios'
+import {AuthContext} from "../../context/AuthContext";
 
 export const PostAddingContainer = () => {
     const {loading, request, error, clearError} = useHttp()
@@ -9,7 +10,8 @@ export const PostAddingContainer = () => {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('')
     const [message, setMessage] = useState('')
-
+    const auth = useContext(AuthContext)
+    const token = auth.token
     const changeTextHandler = (e) => {
         setForm({...form, [e.target.name]: e.target.value})
     }
@@ -19,7 +21,7 @@ export const PostAddingContainer = () => {
         setFilename(e.target.files[0].name)
     }
 
-    const { postText, postName } = form
+    const {postText, postName} = form
     const onSubmitHandler = async e => {
         e.preventDefault()
         const formData = new FormData()
@@ -30,7 +32,8 @@ export const PostAddingContainer = () => {
         try {
             const res = await axios.post('/api/posts/add', formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${token}`
                     }
                 }
             )
@@ -77,7 +80,7 @@ export const PostAddingContainer = () => {
 
 
     return <PostAdding changeTextHandler={changeTextHandler}
-        onChangeFileHandler={onChangeFileHandler}
-        onSubmitHandler={onSubmitHandler}
-        loading={loading}/>
+                       onChangeFileHandler={onChangeFileHandler}
+                       onSubmitHandler={onSubmitHandler}
+                       loading={loading}/>
 }

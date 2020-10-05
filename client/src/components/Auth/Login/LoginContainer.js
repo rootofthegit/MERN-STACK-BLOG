@@ -5,6 +5,9 @@ import {useMessage} from "../../../hooks/message.hook";
 import {useHttp} from "../../../hooks/http.hook";
 import {AuthContext} from "../../../context/AuthContext";
 import SignIn from "./Login";
+import {getUserData} from "../../../redux/actions";
+import {useDispatch} from "react-redux";
+
 
 export const LoginContainer = () => {
     const auth = useContext(AuthContext)
@@ -14,6 +17,7 @@ export const LoginContainer = () => {
     const [form, setForm] = useState({
         email: '', password: ''
     })
+    const dispatch = useDispatch()
 
     useEffect(() => {
         message(error)
@@ -28,6 +32,8 @@ export const LoginContainer = () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
             auth.login(data.token, data.userId, data.userName)
+
+            dispatch(getUserData(data))
         } catch (e) {
         }
     }

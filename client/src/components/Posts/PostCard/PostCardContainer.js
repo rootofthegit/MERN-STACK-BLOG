@@ -1,19 +1,22 @@
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {PostCard} from "./PostCard";
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {AuthContext} from "../../../context/AuthContext";
+import {connect, useDispatch} from "react-redux";
+import {addLike} from "../../../redux/actions";
 
 export const PostCardContainer = (props) => {
-    const {request, loading} = useHttp()
+    const {loading} = useHttp()
     const auth = useContext(AuthContext)
 
-    const likeBody = {userId: auth.userId, postId: props.postId}
-    const likeHandler = async () => {
+    const dispatch = useDispatch()
+
+    const likeHandler = () => {
+        const likeData = {userId: auth.userId, postId: props.postId, token: auth.token}
         if (auth.isAuthenticated) {
             try {
-                const data = await request('/api/posts/like/', 'POST', {...likeBody})
-                alert(data.message)
+                dispatch(addLike(likeData))
             } catch (e) {
             }
         }
@@ -28,3 +31,5 @@ export const PostCardContainer = (props) => {
                      postId={props.postId} postLikes={props.postLikes}
                      likeHandler={likeHandler}/>
 }
+
+export default connect(null, null)(PostCardContainer)

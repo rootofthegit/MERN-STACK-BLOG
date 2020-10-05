@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from "@material-ui/core/Grid";
 import BasicPagination from "../../Pagination/Pagination";
 import {Footer} from "../../Footer/Footer";
-import {PostCardContainer} from "../PostCard/PostCardContainer";
+import PostCardContainer from "../PostCard/PostCardContainer";
 
 export const PostsPage = ({posts}) => {
     if (!posts.length) {

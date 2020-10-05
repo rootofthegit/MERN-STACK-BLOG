@@ -1,9 +1,12 @@
+export const GET_USER_DATA = 'USER/GET_USER_DATA'
+
 export const GET_POSTS = 'POSTS/GET_POST'
 export const ADD_LIKE = 'POSTS/ADD_LIKE'
 export const DELETE_LIKE = 'POSTS/DELETE_LIKE'
 export const ADD_COMMENT = 'POSTS/ADD_COMMENT'
 export const DELETE_COMMENT = 'POSTS/DELETE_COMMENT'
 export const ADD_POST = 'POSTS/ADD_POST'
+
 export const SHOW_LOADER = 'APP/SHOW_LOADER'
 export const HIDE_LOADER = 'APP/HIDE_LOADER'
 export const SHOW_ALERT = 'APP/SHOW_ALERT'
