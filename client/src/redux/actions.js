@@ -4,11 +4,11 @@ import {ADD_LIKE, GET_POSTS, GET_USER_DATA} from "./types";
 export function getPosts() {
     return async dispatch => {
         try {
-            const response = await fetch('/api/posts/')
-            const posts = await response.json()
-            dispatch({type: GET_POSTS, payload: posts})
+                const response = await fetch('/api/posts/')
+                const posts = await response.json()
+                dispatch({type: GET_POSTS, payload: posts})
         } catch (e) {
-            console.log("get request failed")
+            console.log("get posts request failed")
         }
     }
 }

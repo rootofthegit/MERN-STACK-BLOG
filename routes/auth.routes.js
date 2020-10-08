@@ -82,7 +82,7 @@ router.post(
                 {expiresIn: '7d'}
             )
 
-            res.json({token, userId: user.id, userName: user.name})
+            res.json({token, userId: user.id, userName: user.name, likedPosts: user.likedPosts})
 
         } catch (e) {
             res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})

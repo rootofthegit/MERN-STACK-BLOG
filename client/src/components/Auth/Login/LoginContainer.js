@@ -31,7 +31,7 @@ export const LoginContainer = () => {
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
-            auth.login(data.token, data.userId, data.userName)
+            auth.login(data.token, data.userId, data.userName, data.likedPosts, data.comments)
 
             dispatch(getUserData(data))
         } catch (e) {

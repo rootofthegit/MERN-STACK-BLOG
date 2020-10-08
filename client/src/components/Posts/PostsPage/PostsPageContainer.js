@@ -1,11 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {PostsPage} from './PostsPage'
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {connect, useDispatch} from "react-redux";
 import {getPosts} from "../../../redux/actions";
+import {AuthContext} from "../../../context/AuthContext";
+
 
 const PostsPageContainer = ({posts}) => {
+    const auth = useContext(AuthContext)
+    const token = auth.token
     const {loading} = useHttp()
     const dispatch = useDispatch()
 

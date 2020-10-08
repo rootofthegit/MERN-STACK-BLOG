@@ -5,7 +5,7 @@ import axios from 'axios'
 import {AuthContext} from "../../context/AuthContext";
 
 export const PostAddingContainer = () => {
-    const {loading, request, error, clearError} = useHttp()
+    const {loading} = useHttp()
     const [form, setForm] = useState({postName: '', postText: ''})
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('')
@@ -46,38 +46,6 @@ export const PostAddingContainer = () => {
         }
 
     }
-
-
-    // const [selectedFile, setSelectedFile] = useState({
-    //     sFile: null
-    // })
-    //
-    //
-    // const addImgHandler = (event) => {
-    //     setSelectedFile({selectedFile: event.target.files[0]})
-    // }
-    //
-    //
-    // const changeTextHandler = event => {
-    //     setForm({...form, [event.target.name]: event.target.value})
-    // }
-    // const {postName, postText} = form
-    // const postAddingHandler = async (e) => {
-    //     e.preventDefault();
-    //
-    //     try {
-    //         const data = await request('/api/posts/addnewpost', 'POST', FormData)
-    //         alert(data.message)
-    //     } catch (e) {
-    //     }
-    // }
-    //
-    //
-    // useEffect(() => {
-    //     message(error)
-    //     clearError()
-    // }, [error, message, clearError])
-
 
     return <PostAdding changeTextHandler={changeTextHandler}
                        onChangeFileHandler={onChangeFileHandler}

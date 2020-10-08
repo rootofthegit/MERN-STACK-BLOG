@@ -1,5 +1,3 @@
-const {check, validationResult} = require('express-validator');
-
 const {Router} = require('express')
 const Post = require('../models/Post')
 const User = require('../models/User')
@@ -10,6 +8,7 @@ router.get('/', async (req, res) => {
     try {
         const posts = await Post.find()
         res.json(posts)
+
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
     }

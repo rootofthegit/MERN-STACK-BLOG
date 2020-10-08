@@ -7,7 +7,7 @@ const initialState = {
 export const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POSTS:
-            return ({...state, posts: action.payload})
+            return ({...state/*, posts: action.payload*/})
         case ADD_LIKE:
             const {postId} = action.payload
             return {

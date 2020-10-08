@@ -10,7 +10,6 @@ const schema = new Schema({
       comment: String,
       date: Date
     },
-    avatar: {type: String},
     dataRegister: {type: Date, default: Date.now}
 })
 

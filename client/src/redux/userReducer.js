@@ -5,8 +5,7 @@ const initialState = {
     userId: '',
     token: '',
     likedPosts: [],
-    comments: [],
-    avatar: ''
+    comments: []
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -17,8 +16,7 @@ export const userReducer = (state = initialState, action) => {
                 userId: action.payload.userId,
                 token: action.payload.token,
                 likedPosts: action.payload.likedPosts,
-                comments: action.payload.comments,
-                avatar: action.payload.avatar
+                comments: action.payload.comments
             })
 
         default:
