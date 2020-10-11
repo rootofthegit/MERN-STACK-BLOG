@@ -11,6 +11,7 @@ app.use(fileUpload())
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/posts', require('./routes/posts.routes'))
+app.use('/api/user', require('./routes/user.routes'))
 
 const PORT = config.get('port') || 5000
 

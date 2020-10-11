@@ -1,28 +1,29 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {PostsPage} from './PostsPage'
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {connect, useDispatch} from "react-redux";
-import {getPosts} from "../../../redux/actions";
-import {AuthContext} from "../../../context/AuthContext";
+import {getPosts, getUserData} from "../../../redux/actions";
+import {useAuth} from "../../../hooks/auth.hook";
 
 
 const PostsPageContainer = ({posts}) => {
-    const auth = useContext(AuthContext)
-    const token = auth.token
     const {loading} = useHttp()
     const dispatch = useDispatch()
+    const auth = useAuth()
 
-    const fetchPosts = useCallback(async () => {
-        try {
-            dispatch(getPosts())
-        } catch (e) {
+    const token = auth.token
+
+    const fetchLinks = useCallback(() => {
+        dispatch(getPosts())
+        if (!!token) {
+            dispatch(getUserData(token))
         }
-    }, [])
+    }, [dispatch, token])
 
     useEffect(() => {
-        fetchPosts()
-    }, [fetchPosts])
+        fetchLinks()
+    }, [fetchLinks])
 
     if (loading) {
         return <Loader/>

@@ -8,9 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {Comment, FavoriteBorder, Star} from "@material-ui/icons";
+import {Comment, FavoriteBorder} from "@material-ui/icons";
 import {useHistory} from "react-router-dom"
 import Badge from "@material-ui/core/Badge";
 

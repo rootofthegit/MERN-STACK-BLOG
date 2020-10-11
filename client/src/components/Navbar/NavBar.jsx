@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
 import rofl from '../../aseets/images/rofl.gif'
-import {AccountCircle, AddCircle, Apps, Favorite, Grade, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
+import {AccountCircle, AddCircle, Apps, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
 import {NavLink, useHistory} from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -180,14 +180,13 @@ export const NavBar = (props) => {
 
             <AppBar position="fixed" style={{background: "#eceff1", borderBottom: "solid #90a4ae 1px"}}>
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="black" aria-label="menu">
+                    <IconButton edge="start" className={classes.menuButton} color="default" aria-label="menu">
                         <Apps/>
                     </IconButton>
                     <div>
-                        <NavLink to="/"><img src={logo} width={350}
+                        <NavLink to="/"><img src={logo} width={350} alt={"=))"}
                                              style={{position: "absolute", top: 1, left: 76}}/></NavLink>
-                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale}/>
-                    </div>
+                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale} alt={"ROFL"}/>                    </div>
 
                     <div className={classes.grow}/>
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react"
+import React, {useContext, useState} from "react"
 import {useHttp} from "../../hooks/http.hook"
 import PostAdding from "./PostAdding"
 import axios from 'axios'
@@ -8,8 +8,7 @@ export const PostAddingContainer = () => {
     const {loading} = useHttp()
     const [form, setForm] = useState({postName: '', postText: ''})
     const [file, setFile] = useState('');
-    const [filename, setFilename] = useState('')
-    const [message, setMessage] = useState('')
+
     const auth = useContext(AuthContext)
     const token = auth.token
     const changeTextHandler = (e) => {
@@ -18,7 +17,6 @@ export const PostAddingContainer = () => {
 
     const onChangeFileHandler = e => {
         setFile(e.target.files[0])
-        setFilename(e.target.files[0].name)
     }
 
     const {postText, postName} = form
@@ -36,13 +34,11 @@ export const PostAddingContainer = () => {
                         Authorization: `Bearer ${token}`
                     }
                 }
+
             )
+            console.log(res)
         } catch (err) {
-            if (err.response.status === 500) {
-                setMessage('There was a problem with the server');
-            } else {
-                setMessage(err.response.data.msg);
-            }
+            console.log(err)
         }
 
     }

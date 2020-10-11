@@ -12,11 +12,13 @@ const store = createStore(rootReducer, compose(applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 
 const app = (
-    <React.StrictMode>
-        <Provider store={store}>
+
+    <Provider store={store}>
+        <React.StrictMode>
             <App/>
-        </Provider>
-    </React.StrictMode>)
+        </React.StrictMode>
+    </Provider>
+)
 
 ReactDOM.render(app, document.getElementById('root')
 );

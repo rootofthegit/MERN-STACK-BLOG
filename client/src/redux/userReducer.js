@@ -1,22 +1,18 @@
 import { GET_USER_DATA } from "./types"
 
 const initialState = {
-    userName: '',
-    userId: '',
-    token: '',
-    likedPosts: [],
-    comments: []
+    name: '',
+    email: '',
+    likedPosts: []
 }
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_DATA:
             return ({...state,
-                userName: action.payload.userName,
-                userId: action.payload.userId,
-                token: action.payload.token,
-                likedPosts: action.payload.likedPosts,
-                comments: action.payload.comments
+                name: action.payload.name,
+                email: action.payload.email,
+                likedPosts: action.payload.likedPosts
             })
 
         default:

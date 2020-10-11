@@ -1,4 +1,4 @@
-import {ADD_LIKE, GET_POSTS, GET_USER_DATA} from "./types";
+import {GET_POSTS, GET_USER_DATA, TOGGLE_LIKE} from "./types";
 
 
 export function getPosts() {
@@ -13,30 +13,36 @@ export function getPosts() {
     }
 }
 
-export function addLike(likeData) {
+export function getUserData(token) {
+    return async dispatch => {
+        try {
+            const response = await fetch('/api/user/userdata/', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`}
+            })
+            const userData = await response.json()
+            dispatch({type: GET_USER_DATA, payload: userData})
+        } catch (e) {
+            console.log("get posts request failed")
+        }
+    }
+}
+
+export function toggleLike(likeData) {
     return async dispatch => {
         try {
             const {token} = likeData
             const response = await fetch('/api/posts/like/', {
-                method: 'POST',
-                body: JSON.stringify({...likeData}),
-                headers: {
+                method: 'POST', body: JSON.stringify({...likeData}), headers: {
                     'Content-Type': 'application/json', Authorization: `Bearer ${token}`
                 }
             })
             const data = await response.json()
             console.log(data)
-            dispatch({type: ADD_LIKE, payload: likeData})
+            dispatch({type: TOGGLE_LIKE, payload: likeData})
         } catch (e) {
             console.log("post like request failed")
         }
-    }
-}
-
-export function getUserData(userData) {
-    return {
-        type: GET_USER_DATA,
-        payload: userData
     }
 }
 
