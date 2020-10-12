@@ -12,6 +12,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import {Comment, FavoriteBorder} from "@material-ui/icons";
 import {useHistory} from "react-router-dom"
 import Badge from "@material-ui/core/Badge";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
     root: {
@@ -51,8 +52,8 @@ export const PostCard = (props) => {
             </CardActionArea>
             <CardActions disableSpacing>
                 <IconButton title="Like!" onClick={props.likeHandler}>
-                    <Badge badgeContent={props.postLikes} color="default">
-                        <FavoriteBorder/>
+                    <Badge badgeContent={props.postLikes} color={((props.likeIndex!==-1)&&"secondary")||"default"}>
+                        {((props.likeIndex!==-1)&&<FavoriteIcon/>)||<FavoriteBorder/>}
                     </Badge>
                 </IconButton>
                 <IconButton title="Добавить комментарий">

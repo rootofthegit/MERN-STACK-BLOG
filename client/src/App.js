@@ -5,7 +5,7 @@ import {useRoutes} from "./routes";
 import {useAuth} from "./hooks/auth.hook";
 import Loader from "./components/Loader/Loader";
 import {AuthContext} from "./context/AuthContext";
-import {NavBarContainer} from "./components/Navbar/NavBarContainer";
+import NavBarContainer from "./components/Navbar/NavBarContainer";
 
 
 function App() {

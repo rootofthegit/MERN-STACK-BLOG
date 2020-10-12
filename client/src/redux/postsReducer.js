@@ -12,15 +12,14 @@ export const postReducer = (state = initialState, action) => {
         case TOGGLE_LIKE:
             const {postId, likedPosts} = action.payload
             const likedPostIndex = likedPosts.indexOf(postId)
-            console.log(likedPostIndex)
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if ((post._id === postId)/*&&(likedPostIndex!==-1)*/) {
-                        return {...post, likes: [--post.likes]}
-                    }/* else {
-                        return {...post, likes: [++post.likes]}
-                    }*/
+                    if ((post._id === postId)&&(likedPostIndex!==-1)) {
+                        return {...post, likes: [--post.likes],...state.userData, userData: likedPosts.splice(likedPostIndex, 1)}
+                    } else if ((post._id === postId)&&(likedPostIndex===-1)) {
+                        return {...post, likes: [++post.likes], ...state.userData, userData: likedPosts.push(postId)}
+                    }
                     return post
                 })
             }

@@ -4,8 +4,8 @@ import {useHistory} from "react-router-dom";
 import {useHttp} from "../../../hooks/http.hook";
 import {AuthContext} from "../../../context/AuthContext";
 import SignIn from "./Login";
-// import {getUserData} from "../../../redux/actions";
-// import {useDispatch} from "react-redux";
+import {getUserData} from "../../../redux/actions";
+import {useDispatch} from "react-redux";
 
 
 export const LoginContainer = () => {
@@ -15,7 +15,7 @@ export const LoginContainer = () => {
     const [form, setForm] = useState({
         email: '', password: ''
     })
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         clearError()
@@ -28,9 +28,8 @@ export const LoginContainer = () => {
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
-            auth.login(data.token, data.userId, data.userName, data.likedPosts, data.comments)
-
-            // dispatch(getUserData(data))
+            auth.login(data.token, data.userName)
+            dispatch(getUserData(data.token))
         } catch (e) {
         }
     }

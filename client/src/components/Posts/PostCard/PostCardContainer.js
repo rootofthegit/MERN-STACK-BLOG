@@ -6,28 +6,24 @@ import {AuthContext} from "../../../context/AuthContext";
 import {connect, useDispatch} from "react-redux";
 import {toggleLike} from "../../../redux/actions";
 
+
 export const PostCardContainer = (props) => {
     const {loading} = useHttp()
     const auth = useContext(AuthContext)
 
     const dispatch = useDispatch()
+    const likedPosts = props.likedPosts
+    const likeIndex = likedPosts.indexOf(props.postId)
 
     const likeHandler = () => {
         const likeData = {postId: props.postId, token: auth.token, likedPosts: props.likedPosts}
         if (auth.isAuthenticated) {
             try {
                 dispatch(toggleLike(likeData))
-                /*const likedPosts = props.likedPosts
-                const likeIndex = likedPosts.indexOf(props.postId)
-                if (likeIndex !== -1) {
-                    console.log("УБРАТЬ!")
-                    dispatch(addLike(likeData))
-                } else {
-                    console.log("ДОБАВИТЬ!")
-                    dispatch(addLike(likeData))
-                }*/
             } catch (e) {
             }
+        } else {
+            return alert("Чтобы ставить лайки, надо зарегистрироваться!")
         }
 
     }
@@ -37,7 +33,7 @@ export const PostCardContainer = (props) => {
     }
 
     return <PostCard postTitle={props.postTitle} postText={props.postText} imageSrc={props.imageSrc}
-                     postId={props.postId} postLikes={props.postLikes}
+                     postId={props.postId} postLikes={props.postLikes} likeIndex={likeIndex}
                      likeHandler={likeHandler}/>
 
 }

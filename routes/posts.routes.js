@@ -47,7 +47,6 @@ router.post('/like', auth, async (req, res) => {
     try {
         const {postId} = req.body
         const userId = req.user.userId
-        console.log(postId, userId)
 
         const user = await User.findById(userId)
         const post = await Post.findById(postId)

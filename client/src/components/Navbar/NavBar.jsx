@@ -229,7 +229,7 @@ export const NavBar = (props) => {
                                 <PostAdd/>
                             </IconButton>
                             <IconButton color="default" title="Понравившиеся">
-                                <Badge badgeContent={17} color="default">
+                                <Badge badgeContent={props.likedPosts.length} color="default">
                                     <Star/>
                                 </Badge>
                             </IconButton>
