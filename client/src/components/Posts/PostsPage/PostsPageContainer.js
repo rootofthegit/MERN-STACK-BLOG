@@ -14,7 +14,7 @@ const PostsPageContainer = ({posts}) => {
 
     const token = auth.token
 
-    const fetchLinks = useCallback(() => {
+    const fetchPosts = useCallback(() => {
         dispatch(getPosts())
         if (!!token) {
             dispatch(getUserData(token))
@@ -22,8 +22,8 @@ const PostsPageContainer = ({posts}) => {
     }, [dispatch, token])
 
     useEffect(() => {
-        fetchLinks()
-    }, [fetchLinks])
+        fetchPosts()
+    }, [fetchPosts])
 
     if (loading) {
         return <Loader/>

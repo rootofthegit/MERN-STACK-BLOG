@@ -4,7 +4,7 @@ const initialState = {
     posts: []
 }
 
-export const postReducer = (state = initialState, action) => {
+export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POSTS:
             return ({...state, posts: action.payload})
@@ -14,13 +14,17 @@ export const postReducer = (state = initialState, action) => {
             const likedPostIndex = likedPosts.indexOf(postId)
             return {
                 ...state,
-                posts: state.posts.map(post => {
-                    if ((post._id === postId)&&(likedPostIndex!==-1)) {
-                        return {...post, likes: [--post.likes],...state.userData, userData: likedPosts.splice(likedPostIndex, 1)}
-                    } else if ((post._id === postId)&&(likedPostIndex===-1)) {
-                        return {...post, likes: [++post.likes], ...state.userData, userData: likedPosts.push(postId)}
+                posts: state.posts.map(postkey => {
+                    if ((postkey._id === postId)&&(likedPostIndex!==-1)) {
+                        return {...postkey, likes: [--postkey.likes],
+                            userData: likedPosts.splice(likedPostIndex, 1)
+                        }
+                    } else if ((postkey._id === postId)&&(likedPostIndex===-1)) {
+                        return {...postkey, likes: [++postkey.likes],
+                            userData: likedPosts.push(postId)
+                        }
                     }
-                    return post
+                    return postkey
                 })
             }
         default:
