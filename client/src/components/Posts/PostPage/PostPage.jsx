@@ -11,12 +11,17 @@ import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {FavoriteBorder, Reply} from "@material-ui/icons";
+import {Facebook, FavoriteBorder, LinkedIn, Reply, Twitter} from "@material-ui/icons";
 import {useHistory} from 'react-router-dom'
 import Badge from "@material-ui/core/Badge";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Popover from "@material-ui/core/Popover";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +50,25 @@ export const PostPage = (props) => {
 
     const history = useHistory()
     const {title, postText, imageSrc, date} = props.post
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+    const handleListItemClick = (event, index) => {
+        setSelectedIndex(index);
+    };
 
     return <Container maxWidth="lg" style={{marginTop: 90}}>
         <Card className={classes.root}>
@@ -76,9 +100,56 @@ export const PostPage = (props) => {
                         {((props.likeIndex !== -1) && <FavoriteIcon/>) || <FavoriteBorder/>}
                     </Badge>
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton aria-label="share" title="Показать друзьям!" aria-describedby={id} onClick={handleClick}>
                     <ShareIcon/>
                 </IconButton>
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                >
+                    <List component="nav" aria-label="main mailbox folders">
+                        <ListItem
+                            button
+                            selected={selectedIndex === 0}
+                            onClick={(event) => handleListItemClick(event, 0)}
+                        >
+                            <ListItemIcon>
+                                <LinkedIn color="primary"/>
+                            </ListItemIcon>
+                            <ListItemText primary="LinkedIn" />
+                        </ListItem>
+                        <ListItem
+                            button
+                            selected={selectedIndex === 0}
+                            onClick={(event) => handleListItemClick(event, 0)}
+                        >
+                            <ListItemIcon>
+                                <Twitter color="primary"/>
+                            </ListItemIcon>
+                            <ListItemText primary="Twitter" />
+                        </ListItem>
+                        <ListItem
+                            button
+                            selected={selectedIndex === 1}
+                            onClick={(event) => handleListItemClick(event, 1)}
+                        >
+                            <ListItemIcon>
+                                <Facebook color="primary"/>
+                            </ListItemIcon>
+                            <ListItemText primary="Facebook" />
+                        </ListItem>
+                    </List>
+                </Popover>
             </CardActions>
         </Card>
         <Card className={classes.root} style={{marginTop: 20, backgroundColor: "#f5f5f5"}}>
