@@ -8,7 +8,7 @@ const schema = new Schema({
     comments: [{
       postId: String,
       comment: String,
-      date: Date
+      date: String
     }],
     dataRegister: {type: Date, default: Date.now}
 })

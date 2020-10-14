@@ -18,7 +18,7 @@ export const PostPageContainer = (props) => {
     const likedPosts = props.likedPosts
     const likeIndex = likedPosts.indexOf(postId)
 
-    const [comment, setComment] = useState( '')
+    const [comment, setComment] = useState('')
 
 
     const getPost = useCallback(async () => {
@@ -51,7 +51,9 @@ export const PostPageContainer = (props) => {
 
     const commentHandler = () => {
         if (!!token) {
-            dispatch(addComment(comment, props.userName, postId, Date.now(), token))
+            let dateNow = new Date();
+            let date = `${dateNow.toLocaleTimeString()}, ${dateNow.toLocaleDateString("ua-UA")}`
+            dispatch(addComment(comment, props.userName, postId, date, token))
         } else {
             alert("Чтобы писать комменты, надо войти на сайт дружок!")
         }

@@ -94,7 +94,7 @@ export const PostPage = (props) => {
                                     </Avatar>
                                 }
                                 title={comment.userName}
-                                subheader={`${comment.date.toString().substring(11, 19)}, ${comment.date.toString().substring(0, 10)}`}
+                                subheader={ comment.date }
                             />
                             <CardContent >
                                 <Typography variant="subtitle2">

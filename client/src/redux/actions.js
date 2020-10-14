@@ -86,7 +86,6 @@ export function addComment(comment, userName, postId, date, token) {
             })
             const data = await response.json()
             console.log(data)
-            console.log(`comment: ${comment}, userName: ${userName}, postId: ${postId}, date: ${date}, token: ${token}`)
             const commentPayload = { comment, userName, date }
             dispatch({type: ADD_COMMENT, payload: commentPayload})
         } catch (e) {

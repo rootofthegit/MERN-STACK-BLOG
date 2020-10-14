@@ -10,7 +10,7 @@ const schema = new Schema ({
     comments: [{
         userName: String,
         comment: String,
-        date: Date
+        date: String
     }]
 })
 
