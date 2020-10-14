@@ -5,11 +5,11 @@ const schema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     likedPosts: [String],
-    comments: {
+    comments: [{
       postId: String,
       comment: String,
       date: Date
-    },
+    }],
     dataRegister: {type: Date, default: Date.now}
 })
 

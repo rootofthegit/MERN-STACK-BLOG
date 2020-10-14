@@ -233,8 +233,8 @@ export const NavBar = (props) => {
                                     <Star/>
                                 </Badge>
                             </IconButton>
-                            <IconButton color="default" title="Ответы на комментарии">
-                                <Badge badgeContent={4} color="secondary">
+                            <IconButton color="default" title="Мои комментарии">
+                                <Badge badgeContent={props.comments.length} color="secondary">
                                     <SpeakerNotes/>
                                 </Badge>
                             </IconButton>

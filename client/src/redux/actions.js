@@ -1,4 +1,4 @@
-import {GET_POST_BY_ID, GET_POSTS, GET_USER_DATA, TOGGLE_LIKE, TOGGLE_LIKE_POST} from "./types";
+import {ADD_COMMENT, GET_POST_BY_ID, GET_POSTS, GET_USER_DATA, TOGGLE_LIKE, TOGGLE_LIKE_POST} from "./types";
 
 
 export function getPosts() {
@@ -72,6 +72,25 @@ export function toggleLikePost(likeData) {
             dispatch({type: TOGGLE_LIKE_POST, payload: likeData})
         } catch (e) {
             console.log("post like request failed")
+        }
+    }
+}
+
+export function addComment(comment, userName, postId, date, token) {
+    return async dispatch => {
+        try {
+            const response = await fetch('/api/posts/addcomment/', {
+                method: 'POST', body: JSON.stringify({postId, comment, date}), headers: {
+                    'Content-Type': 'application/json', Authorization: `Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            console.log(data)
+            console.log(`comment: ${comment}, userName: ${userName}, postId: ${postId}, date: ${date}, token: ${token}`)
+            const commentPayload = { comment, userName, date }
+            dispatch({type: ADD_COMMENT, payload: commentPayload})
+        } catch (e) {
+            console.log("post comment request failed")
         }
     }
 }

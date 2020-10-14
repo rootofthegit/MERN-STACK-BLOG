@@ -41,7 +41,7 @@ router.post('/add', auth, async (req, res) => {
 
     const post = new Post({title: postName, postText: postText, imageSrc: `/uploads/${file.name}`})
     await post.save()
-});
+})
 
 router.post('/like', auth, async (req, res) => {
     try {
@@ -65,6 +65,31 @@ router.post('/like', auth, async (req, res) => {
             await user.save()
             return res.status(201).json({message: 'add like'})
         }
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})
+    }
+})
+
+router.post('/addcomment', auth, async (req, res) => {
+    try {
+        const userId = req.user.userId
+
+        const {postId, comment, date} = req.body
+
+        const user = await User.findById(userId)
+        const post = await Post.findById(postId)
+        const userName = user.name
+
+        const userComment = {postId, comment, date}
+        const postComment = {userName, comment, date}
+
+        user.comments.push(userComment)
+        post.comments.push(postComment)
+        await post.save()
+        await user.save()
+
+        return res.status(201).json({message: 'comment added'})
+
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})
     }

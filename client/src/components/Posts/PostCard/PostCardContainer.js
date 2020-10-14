@@ -34,6 +34,7 @@ export const PostCardContainer = (props) => {
 
     return <PostCard postTitle={props.postTitle} postText={props.postText} imageSrc={props.imageSrc}
                      postId={props.postId} postLikes={props.postLikes} likeIndex={likeIndex}
+                     comments={props.comments}
                      likeHandler={likeHandler}/>
 
 }

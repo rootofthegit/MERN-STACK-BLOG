@@ -1,5 +1,5 @@
 export const GET_USER_DATA = 'USER/GET_USER_DATA'
-export const GET_POSTS = 'POSTS/GET_POST'
+export const GET_POSTS = 'POSTS/GET_POSTS'
 
 export const TOGGLE_LIKE = 'POSTS/TOGGLE_LIKE'
 export const TOGGLE_LIKE_POST = 'POSTS/TOGGLE_LIKE_POST'

@@ -7,6 +7,11 @@ const schema = new Schema ({
     date: {type: Date, default: Date.now},
     likes: {type: Number, default: 0},
     clicks: {type: Number, default: 0},
+    comments: [{
+        userName: String,
+        comment: String,
+        date: Date
+    }]
 })
 
 module.exports = model('Post', schema)

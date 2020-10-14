@@ -6,13 +6,15 @@ import {connect} from "react-redux";
 const NavBarContainer = (props) => {
     const auth = useContext(AuthContext)
 
-    return <NavBar isAuthenticated={auth.isAuthenticated} userName={auth.userName} likedPosts={props.likedPosts}/>
+    return <NavBar isAuthenticated={auth.isAuthenticated} userName={auth.userName} likedPosts={props.likedPosts}
+                   comments={props.comments}/>
 }
 
 const mapStateToProps = state => {
     return {
         posts: state.posts.posts,
-        likedPosts: state.userData.likedPosts
+        likedPosts: state.userData.likedPosts,
+        comments: state.userData.comments
     }
 }
 

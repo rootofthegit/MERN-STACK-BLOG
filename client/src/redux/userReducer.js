@@ -3,6 +3,7 @@ import { GET_USER_DATA } from "./types"
 const initialState = {
     name: '',
     email: '',
+    comments: [],
     likedPosts: []
 }
 
@@ -12,6 +13,7 @@ export const userReducer = (state = initialState, action) => {
             return ({...state,
                 name: action.payload.name,
                 email: action.payload.email,
+                comments: action.payload.comments,
                 likedPosts: action.payload.likedPosts
             })
 

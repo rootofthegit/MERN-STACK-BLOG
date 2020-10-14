@@ -1,4 +1,4 @@
-import {GET_POST_BY_ID, TOGGLE_LIKE_POST} from "./types";
+import {ADD_COMMENT, GET_POST_BY_ID, TOGGLE_LIKE_POST} from "./types";
 
 const initialState = {
     title: '',
@@ -6,6 +6,7 @@ const initialState = {
     imageSrc: '',
     date: '',
     likes: null,
+    comments: [],
     clicks: null
 }
 
@@ -18,6 +19,7 @@ export const postReducer = (state = initialState, action) => {
                 imageSrc: action.payload.imageSrc,
                 date: action.payload.date,
                 likes: action.payload.likes,
+                comments: action.payload.comments,
                 clicks: action.payload.clicks
             }
 
@@ -28,6 +30,9 @@ export const postReducer = (state = initialState, action) => {
                 likes: (likedPostIndex!==-1)?(--state.likes):(++state.likes),
                 userData: (likedPostIndex!==-1)?likedPosts.splice(likedPostIndex, 1):likedPosts.push(postId)
             }
+
+        case ADD_COMMENT:
+            return {...state, comments: state.comments.concat([action.payload])}
 
         default:
             return state

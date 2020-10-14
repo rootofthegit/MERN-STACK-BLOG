@@ -57,7 +57,7 @@ export const PostPage = (props) => {
                     </IconButton>
                 }
                 title={title}
-                subheader={`Добавленно: ${date.substring(11, 19)} ${date.substring(0, 10)}`}
+                subheader={`Добавленно: ${date.substring(11, 19)}, ${date.substring(0, 10)}`}
             />
             <CardMedia
                 className={classes.media}
@@ -82,37 +82,40 @@ export const PostPage = (props) => {
             </CardActions>
         </Card>
         <Card className={classes.root} style={{marginTop: 20, backgroundColor: "#f5f5f5"}}>
-            <CardHeader title="Комментарии"/>
+            <CardHeader title="Комментарии" style={{backgroundColor:"#E3E3E3"}}/>
             <CardContent>
-                    <Card className={classes.root}>
-                        <CardHeader
-                            avatar={
-                                <Avatar aria-label="recipe" className={classes.avatar}>
-                                    R
-                                </Avatar>
-                            }
-                            title="Shrimp and Chorizo Paella"
-                            subheader="September 14, 2016"
-                        />
-                        <CardContent >
-                            <Typography variant="subtitle2">
-                                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                {props.post.comments.map((comment) => {
+                    return (
+                        <Card className={classes.root} key={comment._id} style={{marginBottom: 20}}>
+                            <CardHeader style={{borderBottom: "1px solid #C8C8C8", backgroundColor: "#fafafa"}}
+                                avatar={
+                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                        {comment.userName.substring(0, 1)}
+                                    </Avatar>
+                                }
+                                title={comment.userName}
+                                subheader={`${comment.date.toString().substring(11, 19)}, ${comment.date.toString().substring(0, 10)}`}
+                            />
+                            <CardContent >
+                                <Typography variant="subtitle2">
+                                    {comment.comment}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
                 <TextField
                     id="postText"
                     label="Введите свой комментарий"
                     multiline
                     rows={4}
                     variant="outlined"
-                    name="postText"
+                    name="comment"
                     fullWidth
-                    onChange={props.changeTextHandler}
+                    onChange={props.changeHandler}
                     margin="normal"
                 />
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="secondary" onClick={props.commentHandler}>
                     Добавить комментарий
                 </Button>
             </CardContent>

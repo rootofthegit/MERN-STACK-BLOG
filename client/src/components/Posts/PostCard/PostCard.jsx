@@ -52,12 +52,18 @@ export const PostCard = (props) => {
             </CardActionArea>
             <CardActions disableSpacing>
                 <IconButton title="Like!" onClick={props.likeHandler}>
-                    <Badge badgeContent={props.postLikes} color={((props.likeIndex!==-1)&&"secondary")||"default"}>
-                        {((props.likeIndex!==-1)&&<FavoriteIcon/>)||<FavoriteBorder/>}
+                    <Badge badgeContent={props.postLikes}
+                           color={((props.likeIndex !== -1) && "secondary") || "default"}>
+                        {((props.likeIndex !== -1) && <FavoriteIcon/>) || <FavoriteBorder/>}
                     </Badge>
                 </IconButton>
-                <IconButton title="Добавить комментарий">
-                    <Comment/>
+                <IconButton title="Добавить комментарий" onClick={() => {
+                    history.push(`posts/${props.postId}`)
+                }}>
+                    <Badge badgeContent={props.comments.length}
+                           color="secondary">
+                        <Comment/>
+                    </Badge>
                 </IconButton>
                 <IconButton title="Показать друзьям!">
                     <ShareIcon/>

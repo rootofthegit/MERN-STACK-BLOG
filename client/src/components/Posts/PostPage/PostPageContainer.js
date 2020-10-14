@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect} from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import {useParams} from 'react-router-dom'
 import {PostPage} from "./PostPage"
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {connect, useDispatch} from "react-redux";
-import {getPostById, getUserData, toggleLikePost} from "../../../redux/actions";
+import {addComment, getPostById, getUserData, toggleLikePost} from "../../../redux/actions";
 import {useAuth} from "../../../hooks/auth.hook";
 
 export const PostPageContainer = (props) => {
@@ -18,6 +18,7 @@ export const PostPageContainer = (props) => {
     const likedPosts = props.likedPosts
     const likeIndex = likedPosts.indexOf(postId)
 
+    const [comment, setComment] = useState( '')
 
 
     const getPost = useCallback(async () => {
@@ -44,17 +45,32 @@ export const PostPageContainer = (props) => {
 
     }
 
-    if (loading) {
-        return <Loader />
+    const changeHandler = event => {
+        setComment(event.target.value)
     }
 
-    return <> { !loading && <PostPage post = { props.post } likeIndex = { likeIndex } likeHandler={ likeHandler }/> }</>
+    const commentHandler = () => {
+        if (!!token) {
+            dispatch(addComment(comment, props.userName, postId, Date.now(), token))
+        } else {
+            alert("Чтобы писать комменты, надо войти на сайт дружок!")
+        }
+    }
+
+
+    if (loading) {
+        return <Loader/>
+    }
+
+    return <> {!loading && <PostPage post={props.post} likeIndex={likeIndex} likeHandler={likeHandler}
+                                     commentHandler={commentHandler} changeHandler={changeHandler}/>}</>
 }
 
 const mapStateToProps = state => {
     return {
         post: state.post,
-        likedPosts: state.userData.likedPosts
+        likedPosts: state.userData.likedPosts,
+        userName: state.userData.name
     }
 }
 
