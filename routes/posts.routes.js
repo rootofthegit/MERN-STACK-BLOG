@@ -3,6 +3,7 @@ const Post = require('../models/Post')
 const User = require('../models/User')
 const router = Router()
 const auth = require('../middleware/auth.middleware')
+const start = require('../parser/urlParser')
 
 router.get('/', async (req, res) => {
     try {
@@ -89,6 +90,38 @@ router.post('/addcomment', auth, async (req, res) => {
         await user.save()
 
         return res.status(201).json({message: 'comment added'})
+
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})
+    }
+})
+
+router.post('/parsing', auth, async (req, res) => {
+    try {
+        const userId = req.user.userId
+        const user = await User.findById(userId)
+
+        const {parseLink} = req.body
+        const userRole = user.role
+
+        if (userRole === 'admin') {
+                const parseData = await start(parseLink)
+                console.log(parseData)
+            res.status(201).json({message:"все сработало"})
+        } else {
+            console.log("ТЫ НЕ АДМИН!!! МУДАК!")
+        }
+
+        /*
+                const userComment = {postId, comment, date}
+                const postComment = {userName, comment, date}
+
+                user.comments.push(userComment)
+                post.comments.push(postComment)
+                await post.save()
+                await user.save()
+
+                return res.status(201).json({message: 'comment added'})*/
 
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})

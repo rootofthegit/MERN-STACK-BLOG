@@ -5,6 +5,7 @@ import {RegisterContainer} from "./components/Auth/Register/RegisterContainer";
 import PostPageContainer from "./components/Posts/PostPage/PostPageContainer";
 import PostsPageContainer from "./components/Posts/PostsPage/PostsPageContainer";
 import {PostAddingContainer} from "./components/PostAdding/PostAddingContainer";
+import {ParsingContainer} from "./components/Parsing/ParsingContainer";
 
 
 export const useRoutes = () => {
@@ -19,6 +20,9 @@ export const useRoutes = () => {
             </Route>
             <Route path="/addpost">
                 <PostAddingContainer/>
+            </Route>
+            <Route path="/parsing">
+                <ParsingContainer/>
             </Route>
             <Route path="/login">
                 <LoginContainer/>

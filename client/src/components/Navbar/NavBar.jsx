@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
 import rofl from '../../aseets/images/rofl.gif'
-import {AccountCircle, AddCircle, Apps, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
+import {AccountCircle, AddCircle, AddToQueue, Apps, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
 import {NavLink, useHistory} from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -227,6 +227,11 @@ export const NavBar = (props) => {
                                 history.push("/addpost")
                             }}>
                                 <PostAdd/>
+                            </IconButton>
+                            <IconButton color="default" title="Запарсить еще новостей" onClick={() => {
+                                history.push("/parsing")
+                            }}>
+                                <AddToQueue/>
                             </IconButton>
                             <IconButton color="default" title="Понравившиеся">
                                 <Badge badgeContent={props.likedPosts.length} color="default">
