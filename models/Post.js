@@ -3,9 +3,9 @@ const {Schema, model} = require('mongoose')
 const schema = new Schema ({
     title: {type: String},
     postText: {type: String},
-    /*fullPostText: [],*/
+    fullPostText: [],
     imageSrc: {type: String},
-    /*images: [],*/
+    images: [],
     date: {type: Date, default: Date.now},
     likes: {type: Number, default: 0},
     clicks: {type: Number, default: 0},

@@ -84,6 +84,12 @@ async function getDetails(url) {
             fullPostText.push(text)
         }
     })
+    $('.gallery p').each((i, el) => {
+        const text = $(el).text().trim()
+        if (text !== '') {
+            fullPostText.push(text)
+        }
+    })
 
 
     $('.paragraph img').each((i, el) => {

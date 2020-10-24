@@ -18,13 +18,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import CardHeader from "@material-ui/core/CardHeader";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 393,
     },
     media: {
-        height: 250,
+        height: 280,
     },
     marginL: {
         marginLeft: 'auto'
@@ -64,16 +65,16 @@ export const PostCard = (props) => {
             <CardActionArea onClick={() => {
                 history.push(`posts/${props.postId}`)
             }}>
+                <CardHeader
+                    title={<Typography variant="subtitle2" gutterBottom color="error">{shortTitle}</Typography>}
+                />
                 <CardMedia
                     className={classes.media}
                     image={props.imageSrc}
                     title={shortTitle}
                 />
                 <CardContent>
-                    <Typography variant="subtitle2" gutterBottom color="secondary">
-                        {shortTitle}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="initial" component="p">
                         {shortText}
                     </Typography>
                 </CardContent>

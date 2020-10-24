@@ -11,7 +11,3 @@ module.exports = async (url) => {
 
     process.exit(0);
 }
-
-
-
-// start();

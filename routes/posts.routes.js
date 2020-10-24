@@ -105,11 +105,17 @@ router.post('/parsing', auth, async (req, res) => {
         const userRole = user.role
 
         if (userRole === 'admin') {
-                const parseData = await start(parseLink)
-                console.log(parseData)
-            res.status(201).json({message:"все сработало"})
+            const parseData = await start(parseLink)
+            console.log(parseData)
+            parseData.map(async ad => {
+                if (!!ad.photos[0]) {
+                    const post = new Post({title: ad.title, postText: ad.postText, imageSrc: ad.photos[0], images: ad.photos, fullPostText: ad.fullPostText})
+                    await post.save()
+                }
+            })
+            res.status(201).json({message: "все сработало"})
         } else {
-            console.log("ТЫ НЕ АДМИН!!! МУДАК!")
+            res.status(300).json({message: "Ты не админ, вот и хуй тебе!"})
         }
 
         /*

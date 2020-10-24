@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react"
 import {useHttp} from "../../hooks/http.hook"
 import Parsing from "./Parsing"
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../context/AuthContext"
 
 export const ParsingContainer = () => {
     const {loading, request} = useHttp()

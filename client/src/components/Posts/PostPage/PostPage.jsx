@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     root: {},
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '65%', // 16:9
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -49,7 +49,7 @@ export const PostPage = (props) => {
     const classes = useStyles();
 
     const history = useHistory()
-    const {title, postText, imageSrc, date} = props.post
+    const {title, postText, imageSrc, date, images, fullPostText} = props.post
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -74,7 +74,7 @@ export const PostPage = (props) => {
         <Card className={classes.root}>
             <CardHeader
                 action={
-                    <IconButton aria-label="settings" onClick={() => {
+                    <IconButton aria-label="settings" title="Назад к приколам" onClick={() => {
                         history.goBack()
                     }}>
                         <Reply/>
@@ -83,15 +83,22 @@ export const PostPage = (props) => {
                 title={title}
                 subheader={`Добавленно: ${date.substring(11, 19)}, ${date.substring(0, 10)}`}
             />
-            <CardMedia
-                className={classes.media}
-                image={imageSrc}
-                title={title}
-            />
+            <img src={imageSrc} style={{width: '100%'}}/>
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography variant="body1" color="initial" component="p">
                     {postText}
                 </Typography>
+                {images.map(image => {
+                    return (
+                        <div>
+                            <Typography variant="body1" color="initial"
+                                        component="p">{fullPostText[images.indexOf(image)]}</Typography>
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                                <img src={image} style={{maxWidth: '100%'}}/>
+                            </div>
+                        </div>
+                    )
+                })}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton title="Like!" onClick={props.likeHandler}>
@@ -126,7 +133,7 @@ export const PostPage = (props) => {
                             <ListItemIcon>
                                 <LinkedIn color="primary"/>
                             </ListItemIcon>
-                            <ListItemText primary="LinkedIn" />
+                            <ListItemText primary="LinkedIn"/>
                         </ListItem>
                         <ListItem
                             button
@@ -136,7 +143,7 @@ export const PostPage = (props) => {
                             <ListItemIcon>
                                 <Twitter color="primary"/>
                             </ListItemIcon>
-                            <ListItemText primary="Twitter" />
+                            <ListItemText primary="Twitter"/>
                         </ListItem>
                         <ListItem
                             button
@@ -146,28 +153,28 @@ export const PostPage = (props) => {
                             <ListItemIcon>
                                 <Facebook color="primary"/>
                             </ListItemIcon>
-                            <ListItemText primary="Facebook" />
+                            <ListItemText primary="Facebook"/>
                         </ListItem>
                     </List>
                 </Popover>
             </CardActions>
         </Card>
         <Card className={classes.root} style={{marginTop: 20, backgroundColor: "#f5f5f5"}}>
-            <CardHeader title="Комментарии" style={{backgroundColor:"#E3E3E3"}}/>
+            <CardHeader title="Комментарии" style={{backgroundColor: "#E3E3E3"}}/>
             <CardContent>
                 {props.post.comments.map((comment) => {
                     return (
                         <Card className={classes.root} key={comment._id} style={{marginBottom: 20}}>
                             <CardHeader style={{borderBottom: "1px solid #C8C8C8", backgroundColor: "#fafafa"}}
-                                avatar={
-                                    <Avatar aria-label="recipe" className={classes.avatar}>
-                                        {comment.userName.substring(0, 1)}
-                                    </Avatar>
-                                }
-                                title={comment.userName}
-                                subheader={ comment.date }
+                                        avatar={
+                                            <Avatar aria-label="recipe" className={classes.avatar}>
+                                                {comment.userName.substring(0, 1)}
+                                            </Avatar>
+                                        }
+                                        title={comment.userName}
+                                        subheader={comment.date}
                             />
-                            <CardContent >
+                            <CardContent>
                                 <Typography variant="subtitle2">
                                     {comment.comment}
                                 </Typography>
