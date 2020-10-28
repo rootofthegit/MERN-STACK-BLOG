@@ -101,7 +101,7 @@ router.post('/parsing', auth, async (req, res) => {
         const userId = req.user.userId
         const user = await User.findById(userId)
 
-        const {parseLink} = req.body
+        const {parseLink, parseCategory} = req.body
         const userRole = user.role
 
         if (userRole === 'admin') {
@@ -109,7 +109,7 @@ router.post('/parsing', auth, async (req, res) => {
             console.log(parseData)
             parseData.map(async ad => {
                 if (!!ad.photos[0]) {
-                    const post = new Post({title: ad.title, postText: ad.postText, imageSrc: ad.photos[0], images: ad.photos, fullPostText: ad.fullPostText})
+                    const post = new Post({category: parseCategory, title: ad.title, postText: ad.postText, imageSrc: ad.photos[0], images: ad.photos, fullPostText: ad.fullPostText})
                     await post.save()
                 }
             })
@@ -117,17 +117,6 @@ router.post('/parsing', auth, async (req, res) => {
         } else {
             res.status(300).json({message: "Ты не админ, вот и хуй тебе!"})
         }
-
-        /*
-                const userComment = {postId, comment, date}
-                const postComment = {userName, comment, date}
-
-                user.comments.push(userComment)
-                post.comments.push(postComment)
-                await post.save()
-                await user.save()
-
-                return res.status(201).json({message: 'comment added'})*/
 
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова!'})

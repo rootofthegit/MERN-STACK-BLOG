@@ -1,12 +1,23 @@
 import React, {useContext} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import logo from '../../aseets/images/logos.png'
 import rofl from '../../aseets/images/rofl.gif'
-import {AccountCircle, AddCircle, AddToQueue, Apps, PostAdd, SpeakerNotes, Star} from "@material-ui/icons";
+import {
+    AccountCircle,
+    AddCircle,
+    AddToQueue,
+    EmojiNature,
+    FiberNew, ImageSearch,
+    InsertEmoticon, Pets,
+    PostAdd, Reddit,
+    SpeakerNotes, SportsKabaddi, SportsTennis,
+    Star, Subject, Wallpaper
+} from "@material-ui/icons";
+import MonochromePhotosIcon from '@material-ui/icons/MonochromePhotos';
 import {NavLink, useHistory} from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,6 +28,19 @@ import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import {AuthContext} from "../../context/AuthContext"
 import Paper from "@material-ui/core/Paper";
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import clsx from "clsx";
+
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -79,6 +103,37 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    hide: {
+        display: 'none',
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
+    },
+    appBar: {
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
     broot: {
         backgroundColor: "#f2f5f6",
         marginRight: '30px'
@@ -115,6 +170,17 @@ export const NavBar = (props) => {
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
     };
 
     const menuId = 'primary-search-account-menu';
@@ -172,55 +238,60 @@ export const NavBar = (props) => {
                 <p>{props.userName}</p>
             </MenuItem>
         </Menu>
-    );
+    )
     const history = useHistory()
     const ale = () => alert("Пасхальный... xy!")
     return (
         <div className={classes.root}>
 
-            <AppBar position="fixed" style={{background: "#eceff1", borderBottom: "solid #90a4ae 1px"}}>
+            <AppBar position="fixed" style={{background: "#eceff1", borderBottom: "solid #90a4ae 1px"}}
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: open,
+                    })}>
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="default" aria-label="menu">
-                        <Apps/>
+                    <IconButton edge="start" className={classes.menuButton} color="default" aria-label="menu"
+                                title="Разделы прикольные =)" onClick={handleDrawerOpen}>
+                        <MenuIcon/>
                     </IconButton>
                     <div>
-                        <NavLink to="/"><img src={logo} width={350} alt={"=))"}
+                        <NavLink to="/"><img src={logo} width={350} alt={"=))"} title="Самый гуманный в мире!"
                                              style={{position: "absolute", top: 1, left: 76}}/></NavLink>
-                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale} alt={"ROFL"}/>                    </div>
+                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale}
+                             alt={"ROFL"}/></div>
 
                     <div className={classes.grow}/>
 
                     <div hidden={props.isAuthenticated}>
-                    <div className={classes.sectionDesktop}>
-                        <Button size="large" color="default" startIcon={<AccountCircle/>} onClick={() => {
-                            history.push("/login")
-                        }}>
-                            Войти</Button>
+                        <div className={classes.sectionDesktop}>
+                            <Button size="large" color="default" startIcon={<AccountCircle/>} onClick={() => {
+                                history.push("/login")
+                            }}>
+                                Войти</Button>
 
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className={classes.button}
-                            startIcon={<AddCircle/>}
-                            onClick={() => {
-                                history.push("/register")
-                            }}
-                        >
-                            Зарегаться
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                className={classes.button}
+                                startIcon={<AddCircle/>}
+                                onClick={() => {
+                                    history.push("/register")
+                                }}
+                            >
+                                Зарегаться
 
-                        </Button>
-                    </div>
+                            </Button>
+                        </div>
                     </div>
                     <div hidden={!props.isAuthenticated}>
                         <div className={classes.sectionDesktop}>
                             <Paper component="form" className={classes.broot}>
                                 <IconButton className={classes.iconButton} aria-label="menu">
-                                    <SearchIcon />
+                                    <SearchIcon/>
                                 </IconButton>
                                 <InputBase
                                     className={classes.input}
                                     placeholder="Поиск"
-                                    inputProps={{ 'aria-label': 'search google maps' }}
+                                    inputProps={{'aria-label': 'search google maps'}}
                                 />
                             </Paper>
                             <IconButton color="default" title="Добавить пост" onClick={() => {
@@ -263,6 +334,72 @@ export const NavBar = (props) => {
 
                 </Toolbar>
             </AppBar>
+            <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                    </IconButton>
+                </div>
+                <Divider/>
+                <List>
+                    <ListItem button>
+                        <ListItemIcon><InsertEmoticon color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Юмор"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><MonochromePhotosIcon color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Фотоприколы"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><Subject color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Истории"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><Wallpaper color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Демотиваторы"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><Reddit color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Анекдоты"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><ImageSearch color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Смешные картинки"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><Pets color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Животные"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><EmojiNature color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Дикая природа"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><SportsTennis color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Спорт"/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon><SportsKabaddi color="inherit" /></ListItemIcon>
+                        <ListItemText primary="Военное"/>
+                    </ListItem>
+
+                </List>
+                <Divider/>
+                <List>
+                    <ListItem button>
+                        <ListItemIcon><FiberNew color="error" /></ListItemIcon>
+                        <ListItemText primary="Свежие приколы"/>
+                    </ListItem>
+                </List>
+            </Drawer>
             {renderMobileMenu}
             {renderMenu}
         </div>

@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
@@ -83,7 +82,7 @@ export const PostPage = (props) => {
                 title={title}
                 subheader={`Добавленно: ${date.substring(11, 19)}, ${date.substring(0, 10)}`}
             />
-            <img src={imageSrc} style={{width: '100%'}}/>
+            <img alt={title} src={imageSrc} style={{width: '100%'}}/>
             <CardContent>
                 <Typography variant="body1" color="initial" component="p">
                     {postText}
@@ -93,8 +92,8 @@ export const PostPage = (props) => {
                         <div>
                             <Typography variant="body1" color="initial"
                                         component="p">{fullPostText[images.indexOf(image)]}</Typography>
-                            <div style={{display: 'flex', justifyContent: 'center'}}>
-                                <img src={image} style={{maxWidth: '100%'}}/>
+                            <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
+                                <img alt={title} src={image} style={{maxWidth: '100%'}}/>
                             </div>
                         </div>
                     )

@@ -5,7 +5,7 @@ import {AuthContext} from "../../context/AuthContext"
 
 export const ParsingContainer = () => {
     const {loading, request} = useHttp()
-    const [form, setForm] = useState({parseLink: ''})
+    const [form, setForm] = useState({parseLink: '', parseCategory: ''})
 
     const auth = useContext(AuthContext)
     const token = auth.token
@@ -18,8 +18,7 @@ export const ParsingContainer = () => {
 
         try {
             const res = await request('/api/posts/parsing', 'POST', {...form},
-                {Authorization: `Bearer ${token}`}
-        )
+                {Authorization: `Bearer ${token}`})
             console.log(res)
         } catch (err) {
             console.log(err)

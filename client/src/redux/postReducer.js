@@ -1,6 +1,7 @@
 import {ADD_COMMENT, GET_POST_BY_ID, TOGGLE_LIKE_POST} from "./types";
 
 const initialState = {
+    category: '',
     title: '',
     postText: '',
     fullPostText: [],
@@ -16,6 +17,7 @@ export const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POST_BY_ID:
             return {...state,
+                category: action.payload.category,
                 title: action.payload.title,
                 postText: action.payload.postText,
                 fullPostText: action.payload.fullPostText,

@@ -3,11 +3,13 @@ import {NavBar} from "./NavBar";
 import {AuthContext} from "../../context/AuthContext";
 import {connect} from "react-redux";
 
+
 const NavBarContainer = (props) => {
     const auth = useContext(AuthContext)
 
     return <NavBar isAuthenticated={auth.isAuthenticated} userName={auth.userName} likedPosts={props.likedPosts}
-                   comments={props.comments}/>
+                   comments={props.comments}
+    />
 }
 
 const mapStateToProps = state => {

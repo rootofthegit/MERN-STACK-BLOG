@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {ArtTrack} from "@material-ui/icons";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -58,6 +61,19 @@ export default function Parsing(props) {
                         autoFocus
                         onChange={props.changeTextHandler}
                     />
+
+                    <RadioGroup aria-label="parseCategory" name="parseCategory" onChange={props.changeTextHandler}>
+                        <FormControlLabel value="FunnyPictures" control={<Radio />} label="Смешные картинки" />
+                        <FormControlLabel value="jumor" control={<Radio />} label="Юмор" />
+                        <FormControlLabel value="demotivation" control={<Radio />} label="Демотиваторы" />
+                        <FormControlLabel value="photo" control={<Radio />} label="Фото" />
+                        <FormControlLabel value="anekdot" control={<Radio />} label="Анекдоты" />
+                        <FormControlLabel value="animals" control={<Radio />} label="Животные" />
+                        <FormControlLabel value="wildNature" control={<Radio />} label="Дикая природа" />
+                        <FormControlLabel value="sport" control={<Radio />} label="Спорт" />
+                        <FormControlLabel value="military" control={<Radio />} label="Военное" />
+                        <FormControlLabel value="stories" control={<Radio />} label="Истории" />
+                    </RadioGroup>
 
                     <Button
                         type="submit"
