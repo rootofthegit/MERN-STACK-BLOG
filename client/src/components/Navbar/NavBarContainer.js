@@ -8,7 +8,7 @@ const NavBarContainer = (props) => {
     const auth = useContext(AuthContext)
 
     return <NavBar isAuthenticated={auth.isAuthenticated} userName={auth.userName} likedPosts={props.likedPosts}
-                   comments={props.comments}
+                   comments={props.comments} role={props.role}
     />
 }
 
@@ -16,7 +16,8 @@ const mapStateToProps = state => {
     return {
         posts: state.posts.posts,
         likedPosts: state.userData.likedPosts,
-        comments: state.userData.comments
+        comments: state.userData.comments,
+        role: state.userData.role
     }
 }
 

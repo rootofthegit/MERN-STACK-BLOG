@@ -4,7 +4,7 @@ import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {AuthContext} from "../../../context/AuthContext";
 import {connect, useDispatch} from "react-redux";
-import {toggleLike} from "../../../redux/actions";
+import {showAlert, toggleLike} from "../../../redux/actions";
 
 
 export const PostCardContainer = (props) => {
@@ -23,7 +23,7 @@ export const PostCardContainer = (props) => {
             } catch (e) {
             }
         } else {
-            return alert("Чтобы ставить лайки, надо зарегистрироваться!")
+            dispatch(showAlert("Чтобы ставить лайки, надо зарегистрироваться!", 'info'))
         }
 
     }
@@ -35,13 +35,14 @@ export const PostCardContainer = (props) => {
     return <PostCard postTitle={props.postTitle} postText={props.postText} imageSrc={props.imageSrc}
                      postId={props.postId} postLikes={props.postLikes} likeIndex={likeIndex}
                      comments={props.comments}
-                     likeHandler={likeHandler}/>
+                     likeHandler={likeHandler}
+                     alert={props.alert}/>
 
 }
 const mapStateToProps = state => {
     return {
         posts: state.posts.posts,
-        likedPosts: state.userData.likedPosts
+        likedPosts: state.userData.likedPosts,
     }
 }
 

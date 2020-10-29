@@ -20,7 +20,7 @@ export default function BasicPagination() {
                     justifyContent: 'center',
                     margin: 30
                 }}>
-                    <Pagination count={10} color="secondary"/>
+                    <Pagination count={15} color="secondary"/>
                 </div>
     );
 }

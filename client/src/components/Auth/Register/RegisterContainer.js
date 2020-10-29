@@ -3,9 +3,12 @@ import SignUp from "./Register"
 import {useHttp} from "../../../hooks/http.hook";
 import {useHistory} from "react-router-dom";
 import {AuthContext} from "../../../context/AuthContext";
+import {showAlert} from "../../../redux/actions";
+import {connect} from 'react-redux'
 
 
-export const RegisterContainer = () => {
+
+const RegisterContainer = (props) => {
     const auth = useContext(AuthContext)
     const history = useHistory()
     const {loading, request, error, clearError} = useHttp()
@@ -14,7 +17,7 @@ export const RegisterContainer = () => {
     let data = {}
 
     useEffect(() => {
-        clearError()
+        error&&props.showAlert(error, 'error')
     }, [error, clearError])
 
 
@@ -25,15 +28,25 @@ export const RegisterContainer = () => {
     const registerHandler = async () => {
         try {
             data = await request('/api/auth/register', 'POST', {...form})
-            alert(data.message)
+            props.showAlert(data.message, 'success')
 
-            data.redirect ? history.push("/login") : console.log("хуй!")
+            // data.redirect ? history.push("/login") : console.log("хуй!")
         } catch (e) {
         }
     }
     if (auth.isAuthenticated === true) {
         history.push("/")
     }
-    return <SignUp registerHandler={registerHandler} changeHandler={changeHandler} loading={loading}/>
+    return <SignUp registerHandler={registerHandler} changeHandler={changeHandler} loading={loading} alert={props.alert}/>
 
 }
+
+const mapStateToProps = state => ({
+    alert: state.app.alert
+})
+
+const mapDispatchToProps = {
+    showAlert
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)

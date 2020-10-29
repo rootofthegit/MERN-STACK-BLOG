@@ -19,6 +19,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CardHeader from "@material-ui/core/CardHeader";
+import CustomizedSnackbars from "../../Alerts/Alert";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -86,7 +87,7 @@ export const PostCard = (props) => {
                         {((props.likeIndex !== -1) && <FavoriteIcon/>) || <FavoriteBorder/>}
                     </Badge>
                 </IconButton>
-                <IconButton title="Добавить комментарий" onClick={() => {
+                <IconButton title="Комментарии" onClick={() => {
                     history.push(`posts/${props.postId}`)
                 }}>
                     <Badge badgeContent={props.comments.length}

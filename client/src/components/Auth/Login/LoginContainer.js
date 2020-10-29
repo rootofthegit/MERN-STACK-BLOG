@@ -1,25 +1,24 @@
 import React, {useContext, useEffect, useState} from "react"
 import {useHistory} from "react-router-dom";
-
 import {useHttp} from "../../../hooks/http.hook";
 import {AuthContext} from "../../../context/AuthContext";
 import SignIn from "./Login";
-import {getUserData} from "../../../redux/actions";
-import {useDispatch} from "react-redux";
+import {getUserData, showAlert} from "../../../redux/actions";
+import {connect} from "react-redux";
 
 
-export const LoginContainer = () => {
+const LoginContainer = (props) => {
     const auth = useContext(AuthContext)
     const history = useHistory()
-    const {loading, request, clearError} = useHttp()
+    const {loading, request, clearError, error} = useHttp()
     const [form, setForm] = useState({
         email: '', password: ''
     })
-    const dispatch = useDispatch()
 
     useEffect(() => {
-        clearError()
-    }, [clearError])
+        error&&props.showAlert(error, 'warning')
+        // clearError()
+    }, [error,clearError])
 
     const changeHandler = event => {
             setForm({...form, [event.target.name]: event.target.value})
@@ -29,12 +28,22 @@ export const LoginContainer = () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
             auth.login(data.token, data.userName)
-            dispatch(getUserData(data.token))
+            props.getUserData(data.token)
         } catch (e) {
         }
     }
     if (auth.isAuthenticated===true) {
         history.push("/")
     }
-    return <SignIn loginHandler={loginHandler} changeHandler={changeHandler} loading={loading}/>
+    return <SignIn loginHandler={loginHandler} changeHandler={changeHandler} loading={loading} alert={props.alert}/>
 }
+
+const mapStateToProps = state => ({
+    alert: state.app.alert
+})
+
+const mapDispatchToProps = {
+    showAlert, getUserData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

@@ -11,6 +11,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {LockOpen} from "@material-ui/icons";
 import {NavLink} from "react-router-dom";
+import CustomizedSnackbars from "../../Alerts/Alert";
 
 function Copyright() {
     return (
@@ -51,6 +52,7 @@ export default function SignIn(props) {
     return (
 
         <Container component="main" maxWidth="xs">
+            {props.alert && <CustomizedSnackbars />}
             <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

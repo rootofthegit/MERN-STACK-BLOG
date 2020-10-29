@@ -284,7 +284,7 @@ export const NavBar = (props) => {
                     </div>
                     <div hidden={!props.isAuthenticated}>
                         <div className={classes.sectionDesktop}>
-                            <Paper component="form" className={classes.broot}>
+                            {/*<Paper component="form" className={classes.broot}>
                                 <IconButton className={classes.iconButton} aria-label="menu">
                                     <SearchIcon/>
                                 </IconButton>
@@ -293,17 +293,19 @@ export const NavBar = (props) => {
                                     placeholder="Поиск"
                                     inputProps={{'aria-label': 'search google maps'}}
                                 />
-                            </Paper>
-                            <IconButton color="default" title="Добавить пост" onClick={() => {
-                                history.push("/addpost")
-                            }}>
-                                <PostAdd/>
-                            </IconButton>
-                            <IconButton color="default" title="Запарсить еще новостей" onClick={() => {
-                                history.push("/parsing")
-                            }}>
-                                <AddToQueue/>
-                            </IconButton>
+                            </Paper>*/}
+                            <div hidden={props.role!=='admin'}>
+                                <IconButton color="default" title="Добавить пост" onClick={() => {
+                                    history.push("/addpost")
+                                }}>
+                                    <PostAdd/>
+                                </IconButton>
+                                <IconButton color="default" title="Запарсить еще новостей" onClick={() => {
+                                    history.push("/parsing")
+                                }}>
+                                    <AddToQueue/>
+                                </IconButton>
+                            </div>
                             <IconButton color="default" title="Понравившиеся">
                                 <Badge badgeContent={props.likedPosts.length} color="default">
                                     <Star/>
@@ -351,43 +353,43 @@ export const NavBar = (props) => {
                 <Divider/>
                 <List>
                     <ListItem button>
-                        <ListItemIcon><InsertEmoticon color="inherit" /></ListItemIcon>
+                        <ListItemIcon><InsertEmoticon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Юмор"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><MonochromePhotosIcon color="inherit" /></ListItemIcon>
+                        <ListItemIcon><MonochromePhotosIcon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Фотоприколы"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><Subject color="inherit" /></ListItemIcon>
+                        <ListItemIcon><Subject color="inherit"/></ListItemIcon>
                         <ListItemText primary="Истории"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><Wallpaper color="inherit" /></ListItemIcon>
+                        <ListItemIcon><Wallpaper color="inherit"/></ListItemIcon>
                         <ListItemText primary="Демотиваторы"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><Reddit color="inherit" /></ListItemIcon>
+                        <ListItemIcon><Reddit color="inherit"/></ListItemIcon>
                         <ListItemText primary="Анекдоты"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><ImageSearch color="inherit" /></ListItemIcon>
+                        <ListItemIcon><ImageSearch color="inherit"/></ListItemIcon>
                         <ListItemText primary="Смешные картинки"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><Pets color="inherit" /></ListItemIcon>
+                        <ListItemIcon><Pets color="inherit"/></ListItemIcon>
                         <ListItemText primary="Животные"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><EmojiNature color="inherit" /></ListItemIcon>
+                        <ListItemIcon><EmojiNature color="inherit"/></ListItemIcon>
                         <ListItemText primary="Дикая природа"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><SportsTennis color="inherit" /></ListItemIcon>
+                        <ListItemIcon><SportsTennis color="inherit"/></ListItemIcon>
                         <ListItemText primary="Спорт"/>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon><SportsKabaddi color="inherit" /></ListItemIcon>
+                        <ListItemIcon><SportsKabaddi color="inherit"/></ListItemIcon>
                         <ListItemText primary="Военное"/>
                     </ListItem>
 
@@ -395,7 +397,7 @@ export const NavBar = (props) => {
                 <Divider/>
                 <List>
                     <ListItem button>
-                        <ListItemIcon><FiberNew color="error" /></ListItemIcon>
+                        <ListItemIcon><FiberNew color="error"/></ListItemIcon>
                         <ListItemText primary="Свежие приколы"/>
                     </ListItem>
                 </List>

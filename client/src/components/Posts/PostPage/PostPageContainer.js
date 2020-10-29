@@ -4,7 +4,7 @@ import {PostPage} from "./PostPage"
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {connect, useDispatch} from "react-redux";
-import {addComment, getPostById, getUserData, toggleLikePost} from "../../../redux/actions";
+import {addComment, deletePostById, getPostById, getUserData, showAlert, toggleLikePost} from "../../../redux/actions";
 import {useAuth} from "../../../hooks/auth.hook";
 
 export const PostPageContainer = (props) => {
@@ -40,7 +40,7 @@ export const PostPageContainer = (props) => {
             } catch (e) {
             }
         } else {
-            return alert("Чтобы ставить лайки, надо зарегистрироваться!")
+            dispatch(showAlert("Чтобы ставить лайки, надо зарегистрироваться!", 'info'))
         }
 
     }
@@ -55,8 +55,12 @@ export const PostPageContainer = (props) => {
             let date = `${dateNow.toLocaleTimeString()}, ${dateNow.toLocaleDateString("ua-UA")}`
             dispatch(addComment(comment, props.userName, postId, date, token))
         } else {
-            alert("Чтобы писать комменты, надо войти на сайт дружок!")
+            dispatch(showAlert("Чтобы писать комменты, надо войти на сайт, дружок!", 'info'))
         }
+    }
+
+    const deletePost = () => {
+        dispatch(deletePostById(postId, auth.token))
     }
 
 
@@ -65,14 +69,21 @@ export const PostPageContainer = (props) => {
     }
 
     return <> {!loading && <PostPage post={props.post} likeIndex={likeIndex} likeHandler={likeHandler}
-                                     commentHandler={commentHandler} changeHandler={changeHandler}/>}</>
+                                     commentHandler={commentHandler}
+                                     changeHandler={changeHandler} role={props.role}
+                                     deletePost={deletePost}
+                                     alert={props.alert}/>
+    }
+    </>
 }
 
 const mapStateToProps = state => {
     return {
         post: state.post,
         likedPosts: state.userData.likedPosts,
-        userName: state.userData.name
+        userName: state.userData.name,
+        role: state.userData.role,
+        alert: state.app.alert
     }
 }
 

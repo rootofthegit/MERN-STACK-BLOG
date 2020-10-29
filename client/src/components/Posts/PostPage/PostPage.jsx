@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {Facebook, FavoriteBorder, LinkedIn, Reply, Twitter} from "@material-ui/icons";
+import {DeleteForever, Facebook, FavoriteBorder, LinkedIn, Reply, Twitter} from "@material-ui/icons";
 import {useHistory} from 'react-router-dom'
 import Badge from "@material-ui/core/Badge";
 import TextField from "@material-ui/core/TextField";
@@ -21,6 +21,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Popover from "@material-ui/core/Popover";
+import CustomizedSnackbars from "../../Alerts/Alert";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +71,7 @@ export const PostPage = (props) => {
     };
 
     return <Container maxWidth="lg" style={{marginTop: 90}}>
+        {props.alert && <CustomizedSnackbars />}
         <Card className={classes.root}>
             <CardHeader
                 action={
@@ -82,6 +84,11 @@ export const PostPage = (props) => {
                 title={title}
                 subheader={`Добавленно: ${date.substring(11, 19)}, ${date.substring(0, 10)}`}
             />
+            {(props.role==='admin')&&(<div style={{display: 'flex', justifyContent: 'center', margin:20}}>
+                <Button variant="contained" color="secondary" onClick={props.deletePost}>
+                    Удалить негодный!
+                </Button>
+            </div>)}
             <img alt={title} src={imageSrc} style={{width: '100%'}}/>
             <CardContent>
                 <Typography variant="body1" color="initial" component="p">

@@ -1,4 +1,4 @@
-import {GET_POSTS, TOGGLE_LIKE} from "./types";
+import {DELETE_POST_BY_ID, GET_POSTS, TOGGLE_LIKE} from "./types";
 
 const initialState = {
     posts: []
@@ -27,6 +27,7 @@ export const postsReducer = (state = initialState, action) => {
                     return postkey
                 })
             }
+
         default:
             return state
     }

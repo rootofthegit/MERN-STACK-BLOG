@@ -1,4 +1,12 @@
-import {ADD_COMMENT, GET_POST_BY_ID, GET_POSTS, GET_USER_DATA, TOGGLE_LIKE, TOGGLE_LIKE_POST} from "./types";
+import {
+    ADD_COMMENT,
+    DELETE_POST_BY_ID,
+    GET_POST_BY_ID,
+    GET_POSTS,
+    GET_USER_DATA, HIDE_ALERT, SHOW_ALERT,
+    TOGGLE_LIKE,
+    TOGGLE_LIKE_POST
+} from "./types";
 
 
 export function getPosts() {
@@ -21,6 +29,22 @@ export function getPostById(postId) {
             dispatch({type: GET_POST_BY_ID, payload: post})
         } catch (e) {
             console.log("get posts request failed")
+        }
+    }
+}
+
+export function deletePostById(postId, token) {
+    return async dispatch => {
+        try {
+            const response = await fetch(`/api/posts/${postId}`, {
+                method: 'DELETE', headers: {
+                    'Content-Type': 'application/json', Authorization: `Bearer ${token}`
+                }
+            })
+            const post = await response.json()
+            dispatch({type: DELETE_POST_BY_ID, payload: post})
+        } catch (e) {
+            console.log("delete post request failed")
         }
     }
 }
@@ -91,6 +115,25 @@ export function addComment(comment, userName, postId, date, token) {
         } catch (e) {
             console.log("post comment request failed")
         }
+    }
+}
+
+export function showAlert(text, severity) {
+    return dispatch => {
+        dispatch({
+            type: SHOW_ALERT,
+            payload: {text, severity}
+        })
+
+        setTimeout(() => {
+            dispatch(hideAlert())
+        }, 7000)
+    }
+}
+
+export function hideAlert() {
+    return {
+        type: HIDE_ALERT
     }
 }
 
