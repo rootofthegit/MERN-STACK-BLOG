@@ -5,17 +5,32 @@ const router = Router()
 const auth = require('../middleware/auth.middleware')
 const start = require('../parser/urlParser')
 
-router.get('/', async (req, res) => {
+router.get('/:page', async (req, res) => {
+    const page = req.params.page * 1
+    const limit = 33
+
     try {
-        const posts = await Post.find()
-        res.json(posts)
+        const posts = await Post.find().sort({ $natural: -1 })
+            .limit(limit * 1)
+            .skip((page - 1) * limit )
+            .exec()
+
+        const count = await Post.countDocuments()
+
+        res.json({
+            posts,
+            totalPages: Math.ceil(count/limit),
+            currentPage: page
+        })
+        /*const posts = await Post.find()
+        res.json(posts)*/
 
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/byid/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         res.json(post)
@@ -144,11 +159,10 @@ router.delete('/:id', auth, async (req, res) => {
         const userRole = user.role
 
         if (userRole === 'admin') {
-            Post.remove({_id : req.params.id}, function(err) {
+            Post.remove({_id: req.params.id}, function (err) {
                 if (!err) {
                     console.log("Post Deleted")
-                }
-                else {
+                } else {
                     console.log(err)
                 }
             })

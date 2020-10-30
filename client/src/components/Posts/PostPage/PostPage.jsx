@@ -89,7 +89,7 @@ export const PostPage = (props) => {
                     Удалить негодный!
                 </Button>
             </div>)}
-            <img alt={title} src={imageSrc} style={{width: '100%'}}/>
+            {/*<img alt={title} src={imageSrc} style={{width: '100%'}}/>*/}
             <CardContent>
                 <Typography variant="body1" color="initial" component="p">
                     {postText}

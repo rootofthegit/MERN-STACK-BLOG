@@ -7,7 +7,7 @@ import {getPosts, getUserData} from "../../../redux/actions";
 import {useAuth} from "../../../hooks/auth.hook";
 
 
-const PostsPageContainer = ({posts, alert}) => {
+const PostsPageContainer = ({posts, alert, currentPage}) => {
     const {loading} = useHttp()
     const dispatch = useDispatch()
     const auth = useAuth()
@@ -15,7 +15,7 @@ const PostsPageContainer = ({posts, alert}) => {
     const token = auth.token
 
     const fetchPosts = useCallback(() => {
-        dispatch(getPosts())
+        dispatch(getPosts(currentPage))
         if (!!token) {
             dispatch(getUserData(token))
         }
@@ -35,7 +35,8 @@ const PostsPageContainer = ({posts, alert}) => {
 const mapStateToProps = state => {
     return {
         posts: state.posts.posts,
-        alert: state.app.alert
+        alert: state.app.alert,
+        currentPage: state.posts.currentPage
     }
 }
 

@@ -1,13 +1,25 @@
-import {DELETE_POST_BY_ID, GET_POSTS, TOGGLE_LIKE} from "./types";
+import {GET_POSTS, SET_CURRENT_PAGE, SET_TOTAL_POSTS_COUNT, TOGGLE_LIKE} from "./types";
 
 const initialState = {
-    posts: []
+    posts: [],
+    pageSize: 33,
+    totalPages: 0,
+    currentPage: 1
 }
 
 export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POSTS:
-            return ({...state, posts: action.payload})
+            return ({...state, posts: action.payload.posts, totalPages: action.payload.totalPages,
+                currentPage: action.payload.currentPage})
+
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.payload}
+        }
+        case SET_TOTAL_POSTS_COUNT: {
+            return {...state, totalUsersCount: action.count}
+        }
+
 
         case TOGGLE_LIKE:
             const {postId, likedPosts} = action.payload

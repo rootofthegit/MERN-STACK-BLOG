@@ -3,16 +3,16 @@ import {
     DELETE_POST_BY_ID,
     GET_POST_BY_ID,
     GET_POSTS,
-    GET_USER_DATA, HIDE_ALERT, SHOW_ALERT,
+    GET_USER_DATA, HIDE_ALERT, SET_CURRENT_PAGE, SHOW_ALERT,
     TOGGLE_LIKE,
     TOGGLE_LIKE_POST
 } from "./types";
 
 
-export function getPosts() {
+export function getPosts(page) {
     return async dispatch => {
         try {
-                const response = await fetch('/api/posts/')
+                const response = await fetch(`/api/posts/${page}`)
                 const posts = await response.json()
                 dispatch({type: GET_POSTS, payload: posts})
         } catch (e) {
@@ -21,11 +21,16 @@ export function getPosts() {
     }
 }
 
+export function setCurrentPage(currentPage) {
+    return { type: SET_CURRENT_PAGE, payload: currentPage }
+}
+
 export function getPostById(postId) {
     return async dispatch => {
         try {
-            const response = await fetch(`/api/posts/${postId}`)
-            const post = await response.json()
+            const responseById = await fetch(`/api/posts/byid/${postId}`)
+            const post = await responseById.json()
+            console.log(post)
             dispatch({type: GET_POST_BY_ID, payload: post})
         } catch (e) {
             console.log("get posts request failed")

@@ -13,14 +13,18 @@ export const PostsPage = ({posts, alert}) => {
 
     return (
         <>
-            {alert && <CustomizedSnackbars />}
-            <Container maxWidth="lg" style={{marginTop: 90}}>
+            {alert && <CustomizedSnackbars/>}
+            <div style={{marginTop: 70}}>
+                <BasicPagination/>
+            </div>
+            <Container maxWidth="lg">
                 <Grid container spacing={4}>
                     {posts.map((post) => {
                         return (
                             <Grid item xs key={post._id}>
                                 <PostCardContainer postTitle={post.title} postText={post.postText}
-                                                   imageSrc={post.imageSrc} postId={post._id} postLikes={post.likes} comments={post.comments}/>
+                                                   imageSrc={post.imageSrc} postId={post._id} postLikes={post.likes}
+                                                   comments={post.comments}/>
                             </Grid>
                         )
                     })}
