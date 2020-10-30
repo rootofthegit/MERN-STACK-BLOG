@@ -2,7 +2,7 @@ import {
     ADD_COMMENT,
     DELETE_POST_BY_ID,
     GET_POST_BY_ID,
-    GET_POSTS,
+    GET_POSTS, GET_POSTS_BY_CATEGORY,
     GET_USER_DATA, HIDE_ALERT, SET_CURRENT_PAGE, SHOW_ALERT,
     TOGGLE_LIKE,
     TOGGLE_LIKE_POST
@@ -17,6 +17,18 @@ export function getPosts(page) {
                 dispatch({type: GET_POSTS, payload: posts})
         } catch (e) {
             console.log("get posts request failed")
+        }
+    }
+}
+
+export function getPostsByCategory(category, page) {
+    return async dispatch => {
+        try {
+            const response = await fetch(`/api/posts/bycategory/${category}/${page}`)
+            const posts = await response.json()
+            dispatch({type: GET_POSTS_BY_CATEGORY, payload: posts})
+        } catch (e) {
+            console.log("get posts by category request failed")
         }
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import {connect} from "react-redux";
-import {getPosts, setCurrentPage} from "../../redux/actions";
+import {getPosts, getPostsByCategory, setCurrentPage} from "../../redux/actions";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +18,7 @@ function BasicPagination(props) {
 
     const handleChange = (event, value) => {
         props.setCurrentPage(value)
-        props.getPosts(value)
+        !!props.category?props.getPostsByCategory(props.category, value):props.getPosts(value)
     };
 
     return (
@@ -36,12 +36,13 @@ function BasicPagination(props) {
 const mapStateToProps = state => {
     return {
         currentPage: state.posts.currentPage,
-        totalPages: state.posts.totalPages
+        totalPages: state.posts.totalPages,
+        category: state.posts.category
     }
 }
 
 const mapDispatchToProps = {
-    setCurrentPage, getPosts
+    setCurrentPage, getPosts, getPostsByCategory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasicPagination)

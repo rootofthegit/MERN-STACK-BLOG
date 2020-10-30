@@ -27,7 +27,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import {AuthContext} from "../../context/AuthContext"
-import Paper from "@material-ui/core/Paper";
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -352,43 +351,43 @@ export const NavBar = (props) => {
                 </div>
                 <Divider/>
                 <List>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('jumor'))} alignItems={"center"}>
                         <ListItemIcon><InsertEmoticon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Юмор"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('photo'))}>
                         <ListItemIcon><MonochromePhotosIcon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Фотоприколы"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('stories'))}>
                         <ListItemIcon><Subject color="inherit"/></ListItemIcon>
                         <ListItemText primary="Истории"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('demotivation'))}>
                         <ListItemIcon><Wallpaper color="inherit"/></ListItemIcon>
                         <ListItemText primary="Демотиваторы"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('anekdot'))}>
                         <ListItemIcon><Reddit color="inherit"/></ListItemIcon>
                         <ListItemText primary="Анекдоты"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('FunnyPictures'))}>
                         <ListItemIcon><ImageSearch color="inherit"/></ListItemIcon>
                         <ListItemText primary="Смешные картинки"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('animals'))}>
                         <ListItemIcon><Pets color="inherit"/></ListItemIcon>
                         <ListItemText primary="Животные"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('wildNature'))}>
                         <ListItemIcon><EmojiNature color="inherit"/></ListItemIcon>
                         <ListItemText primary="Дикая природа"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('sport'))}>
                         <ListItemIcon><SportsTennis color="inherit"/></ListItemIcon>
                         <ListItemText primary="Спорт"/>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('military'))}>
                         <ListItemIcon><SportsKabaddi color="inherit"/></ListItemIcon>
                         <ListItemText primary="Военное"/>
                     </ListItem>

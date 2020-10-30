@@ -63,16 +63,16 @@ export default function Parsing(props) {
                     />
 
                     <RadioGroup aria-label="parseCategory" name="parseCategory" onChange={props.changeTextHandler}>
-                        <FormControlLabel value="FunnyPictures" control={<Radio />} label="Смешные картинки" />
                         <FormControlLabel value="jumor" control={<Radio />} label="Юмор" />
-                        <FormControlLabel value="demotivation" control={<Radio />} label="Демотиваторы" />
                         <FormControlLabel value="photo" control={<Radio />} label="Фото" />
+                        <FormControlLabel value="stories" control={<Radio />} label="Истории" />
+                        <FormControlLabel value="demotivation" control={<Radio />} label="Демотиваторы" />
                         <FormControlLabel value="anekdot" control={<Radio />} label="Анекдоты" />
+                        <FormControlLabel value="FunnyPictures" control={<Radio />} label="Смешные картинки" />
                         <FormControlLabel value="animals" control={<Radio />} label="Животные" />
                         <FormControlLabel value="wildNature" control={<Radio />} label="Дикая природа" />
                         <FormControlLabel value="sport" control={<Radio />} label="Спорт" />
                         <FormControlLabel value="military" control={<Radio />} label="Военное" />
-                        <FormControlLabel value="stories" control={<Radio />} label="Истории" />
                     </RadioGroup>
 
                     <Button

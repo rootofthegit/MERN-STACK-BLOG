@@ -1,7 +1,14 @@
-import {GET_POSTS, SET_CURRENT_PAGE, SET_TOTAL_POSTS_COUNT, TOGGLE_LIKE} from "./types";
+import {
+    GET_POSTS,
+    GET_POSTS_BY_CATEGORY,
+    SET_CURRENT_PAGE,
+    SET_TOTAL_POSTS_COUNT,
+    TOGGLE_LIKE
+} from "./types";
 
 const initialState = {
     posts: [],
+    category: null,
     pageSize: 33,
     totalPages: 0,
     currentPage: 1
@@ -12,6 +19,10 @@ export const postsReducer = (state = initialState, action) => {
         case GET_POSTS:
             return ({...state, posts: action.payload.posts, totalPages: action.payload.totalPages,
                 currentPage: action.payload.currentPage})
+
+        case GET_POSTS_BY_CATEGORY:
+            return ({...state, posts: action.payload.posts, totalPages: action.payload.totalPages,
+                currentPage: action.payload.currentPage, category: action.payload.category})
 
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.payload}

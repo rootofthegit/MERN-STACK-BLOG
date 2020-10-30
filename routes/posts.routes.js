@@ -30,6 +30,32 @@ router.get('/:page', async (req, res) => {
     }
 })
 
+router.get('/bycategory/:category/:page', async (req, res) => {
+    const page = req.params.page * 1
+    const limit = 33
+    const category = req.params.category
+
+    try {
+        const posts = await Post.find({category: category})
+            .sort({ $natural: -1 })
+            .limit(limit * 1)
+            .skip((page - 1) * limit )
+            .exec()
+
+        const count = await Post.countDocuments({category: category})
+
+        res.json({
+            posts,
+            category,
+            totalPages: Math.ceil(count/limit),
+            currentPage: page
+        })
+
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
+    }
+})
+
 router.get('/byid/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
