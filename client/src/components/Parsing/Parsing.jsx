@@ -63,6 +63,7 @@ export default function Parsing(props) {
                     />
 
                     <RadioGroup aria-label="parseCategory" name="parseCategory" onChange={props.changeTextHandler}>
+                        <FormControlLabel value="news" control={<Radio />} label="Новости" />
                         <FormControlLabel value="jumor" control={<Radio />} label="Юмор" />
                         <FormControlLabel value="photo" control={<Radio />} label="Фото" />
                         <FormControlLabel value="stories" control={<Radio />} label="Истории" />

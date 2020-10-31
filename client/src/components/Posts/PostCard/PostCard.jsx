@@ -64,7 +64,7 @@ export const PostCard = (props) => {
     return (
         <Card className={classes.root}>
             <CardActionArea onClick={() => {
-                history.push(`posts/${props.postId}`)
+                history.push(`/posts/${props.postId}`)
             }}>
                 <CardHeader
                     title={<Typography variant="subtitle2" gutterBottom color="error">{shortTitle}</Typography>}
@@ -88,7 +88,7 @@ export const PostCard = (props) => {
                     </Badge>
                 </IconButton>
                 <IconButton title="Комментарии" onClick={() => {
-                    history.push(`posts/${props.postId}`)
+                    history.push(`/posts/${props.postId}`)
                 }}>
                     <Badge badgeContent={props.comments.length}
                            color="secondary">
@@ -149,7 +149,7 @@ export const PostCard = (props) => {
 
                 <Button size="large" color="default" className={classes.marginL}
                         onClick={() => {
-                            history.push(`posts/${props.postId}`)
+                            history.push(`/posts/${props.postId}`)
                         }}>
                     Подробнее...
                 </Button>

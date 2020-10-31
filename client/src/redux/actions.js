@@ -21,12 +21,12 @@ export function getPosts(page) {
     }
 }
 
-export function getPostsByCategory(category, page) {
+export function getPostsByCategory(category, categoryName, page) {
     return async dispatch => {
         try {
             const response = await fetch(`/api/posts/bycategory/${category}/${page}`)
             const posts = await response.json()
-            dispatch({type: GET_POSTS_BY_CATEGORY, payload: posts})
+            dispatch({type: GET_POSTS_BY_CATEGORY, payload: {posts, categoryName}})
         } catch (e) {
             console.log("get posts by category request failed")
         }

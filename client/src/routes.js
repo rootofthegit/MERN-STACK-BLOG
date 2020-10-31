@@ -6,6 +6,7 @@ import PostPageContainer from "./components/Posts/PostPage/PostPageContainer";
 import PostsPageContainer from "./components/Posts/PostsPage/PostsPageContainer";
 import {PostAddingContainer} from "./components/PostAdding/PostAddingContainer";
 import {ParsingContainer} from "./components/Parsing/ParsingContainer";
+import CategoryPageContainer from "./components/Posts/PostsPage/CategoryPageContainer";
 
 
 export const useRoutes = () => {
@@ -14,6 +15,9 @@ export const useRoutes = () => {
         <Switch>
             <Route path="/" exact>
                 <PostsPageContainer/>
+            </Route>
+            <Route path="/category">
+                <CategoryPageContainer/>
             </Route>
             <Route path="/posts/:id">
                 <PostPageContainer/>

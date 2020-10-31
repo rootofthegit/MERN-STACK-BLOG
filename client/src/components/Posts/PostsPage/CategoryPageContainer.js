@@ -3,27 +3,26 @@ import {PostsPage} from './PostsPage'
 import {useHttp} from "../../../hooks/http.hook";
 import Loader from "../../Loader/Loader";
 import {connect, useDispatch} from "react-redux";
-import {getPosts, getUserData} from "../../../redux/actions";
+import {getUserData} from "../../../redux/actions";
 import {useAuth} from "../../../hooks/auth.hook";
 
 
-const PostsPageContainer = ({posts, alert, currentPage, categoryName}) => {
+const CategoryPageContainer = ({posts, alert, categoryName}) => {
     const {loading} = useHttp()
     const dispatch = useDispatch()
     const auth = useAuth()
 
     const token = auth.token
 
-    const fetchPosts = useCallback(() => {
-        dispatch(getPosts(1))
+    const fetchUserData = useCallback(() => {
         if (!!token) {
             dispatch(getUserData(token))
         }
     }, [dispatch, token])
 
     useEffect(() => {
-        fetchPosts()
-    }, [fetchPosts])
+        fetchUserData()
+    }, [fetchUserData])
 
     if (loading) {
         return <Loader/>
@@ -41,4 +40,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(PostsPageContainer)
+export default connect(mapStateToProps, null)(CategoryPageContainer)

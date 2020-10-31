@@ -5,19 +5,34 @@ import BasicPagination from "../../Pagination/Pagination";
 import {Footer} from "../../Footer/Footer";
 import PostCardContainer from "../PostCard/PostCardContainer";
 import CustomizedSnackbars from "../../Alerts/Alert";
+import Typography from "@material-ui/core/Typography";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import Rating from "@material-ui/lab/Rating";
+import HoverRating from "../../RatingStars/rating";
 
-export const PostsPage = ({posts, alert}) => {
+export const PostsPage = ({posts, alert, categoryName}) => {
     if (!posts.length) {
-        return <p>Постов пока нет</p>
+        return <p style={{margin:80}}>Постов пока нет</p>
     }
 
     return (
         <>
             {alert && <CustomizedSnackbars/>}
-            <div style={{marginTop: 70}}>
-                <BasicPagination/>
-            </div>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" >
+                <Grid container spacing={3} style={{marginTop: 80}}>
+                    <Grid item xs>
+                        <Typography variant="h5">
+                            {categoryName}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6} style={{marginTop: -18}}>
+                        <BasicPagination/>
+                    </Grid>
+                    <Grid item xs>
+                        <HoverRating />
+                    </Grid>
+                </Grid>
                 <Grid container spacing={4}>
                     {posts.map((post) => {
                         return (
@@ -30,7 +45,9 @@ export const PostsPage = ({posts, alert}) => {
                     })}
 
                 </Grid>
-                <BasicPagination/>
+                <div style={{margin: 30}}>
+                    <BasicPagination/>
+                </div>
             </Container>
             <Footer/>
         </>

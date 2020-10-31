@@ -16,9 +16,11 @@ const useStyles = makeStyles((theme) => ({
 function BasicPagination(props) {
     const classes = useStyles();
 
+    const categoryName = props.categoryName
+
     const handleChange = (event, value) => {
         props.setCurrentPage(value)
-        !!props.category?props.getPostsByCategory(props.category, value):props.getPosts(value)
+        !!props.category?props.getPostsByCategory(props.category, categoryName, value):props.getPosts(value)
     };
 
     return (
@@ -26,7 +28,6 @@ function BasicPagination(props) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 30
         }}>
             <Pagination count={props.totalPages} page={props.currentPage} onChange={handleChange} color="secondary"/>
         </div>
@@ -37,7 +38,8 @@ const mapStateToProps = state => {
     return {
         currentPage: state.posts.currentPage,
         totalPages: state.posts.totalPages,
-        category: state.posts.category
+        category: state.posts.category,
+        categoryName: state.posts.categoryName
     }
 }
 

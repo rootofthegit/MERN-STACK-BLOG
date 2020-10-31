@@ -37,6 +37,7 @@ import List from "@material-ui/core/List";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from "clsx";
+import CustomizedSnackbars from "../Alerts/Alert";
 
 
 const drawerWidth = 240;
@@ -239,7 +240,6 @@ export const NavBar = (props) => {
         </Menu>
     )
     const history = useHistory()
-    const ale = () => alert("Пасхальный... xy!")
     return (
         <div className={classes.root}>
 
@@ -253,9 +253,12 @@ export const NavBar = (props) => {
                         <MenuIcon/>
                     </IconButton>
                     <div>
-                        <NavLink to="/"><img src={logo} width={350} alt={"=))"} title="Самый гуманный в мире!"
-                                             style={{position: "absolute", top: 1, left: 76}}/></NavLink>
-                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}} onClick={ale}
+                        <NavLink to={"/"}><img src={logo} width={350} alt={"=))"} title="Самый гуманный в мире!"
+                             style={{position: "absolute", top: 1, left: 76, cursor: 'pointer'}}
+                             onClick={props.getPostsHandler}/></NavLink>
+
+                        <img src={rofl} width={29} style={{position: "absolute", top: 41, left: 326}}
+                             onClick={props.showAlert}
                              alt={"ROFL"}/></div>
 
                     <div className={classes.grow}/>
@@ -293,7 +296,7 @@ export const NavBar = (props) => {
                                     inputProps={{'aria-label': 'search google maps'}}
                                 />
                             </Paper>*/}
-                            <div hidden={props.role!=='admin'}>
+                            <div hidden={props.role !== 'admin'}>
                                 <IconButton color="default" title="Добавить пост" onClick={() => {
                                     history.push("/addpost")
                                 }}>
@@ -351,43 +354,44 @@ export const NavBar = (props) => {
                 </div>
                 <Divider/>
                 <List>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('jumor'))} alignItems={"center"}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('jumor', 'Юмор'))}>
                         <ListItemIcon><InsertEmoticon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Юмор"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('photo'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('photo', 'Фотоприколы'))}>
                         <ListItemIcon><MonochromePhotosIcon color="inherit"/></ListItemIcon>
                         <ListItemText primary="Фотоприколы"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('stories'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('stories', 'Истории'))}>
                         <ListItemIcon><Subject color="inherit"/></ListItemIcon>
                         <ListItemText primary="Истории"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('demotivation'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('demotivation', 'Демотиваторы'))}>
                         <ListItemIcon><Wallpaper color="inherit"/></ListItemIcon>
                         <ListItemText primary="Демотиваторы"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('anekdot'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('anekdot', 'Анекдоты'))}>
                         <ListItemIcon><Reddit color="inherit"/></ListItemIcon>
                         <ListItemText primary="Анекдоты"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('FunnyPictures'))}>
+                    <ListItem button
+                              onClick={() => (props.categoryChoosingHandler('FunnyPictures', 'Смешные картинки'))}>
                         <ListItemIcon><ImageSearch color="inherit"/></ListItemIcon>
                         <ListItemText primary="Смешные картинки"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('animals'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('animals', 'Животные'))}>
                         <ListItemIcon><Pets color="inherit"/></ListItemIcon>
                         <ListItemText primary="Животные"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('wildNature'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('wildNature', 'Дикая природа'))}>
                         <ListItemIcon><EmojiNature color="inherit"/></ListItemIcon>
                         <ListItemText primary="Дикая природа"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('sport'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('sport', 'Спорт'))}>
                         <ListItemIcon><SportsTennis color="inherit"/></ListItemIcon>
                         <ListItemText primary="Спорт"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('military'))}>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('military', 'Военное'))}>
                         <ListItemIcon><SportsKabaddi color="inherit"/></ListItemIcon>
                         <ListItemText primary="Военное"/>
                     </ListItem>
@@ -395,14 +399,15 @@ export const NavBar = (props) => {
                 </List>
                 <Divider/>
                 <List>
-                    <ListItem button>
+                    <ListItem button onClick={() => (props.categoryChoosingHandler('news', 'Новости'))}>
                         <ListItemIcon><FiberNew color="error"/></ListItemIcon>
-                        <ListItemText primary="Свежие приколы"/>
+                        <ListItemText primary="Новости"/>
                     </ListItem>
                 </List>
             </Drawer>
             {renderMobileMenu}
             {renderMenu}
+            {props.alert && <CustomizedSnackbars/>}
         </div>
     );
 }

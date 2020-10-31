@@ -9,6 +9,7 @@ import {
 const initialState = {
     posts: [],
     category: null,
+    categoryName: '',
     pageSize: 33,
     totalPages: 0,
     currentPage: 1
@@ -18,11 +19,12 @@ export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POSTS:
             return ({...state, posts: action.payload.posts, totalPages: action.payload.totalPages,
-                currentPage: action.payload.currentPage})
+                currentPage: action.payload.currentPage, categoryName: 'Все приколы', category: null})
 
         case GET_POSTS_BY_CATEGORY:
-            return ({...state, posts: action.payload.posts, totalPages: action.payload.totalPages,
-                currentPage: action.payload.currentPage, category: action.payload.category})
+            return ({...state, posts: action.payload.posts.posts, totalPages: action.payload.posts.totalPages,
+                currentPage: action.payload.posts.currentPage, category: action.payload.posts.category,
+                categoryName: action.payload.categoryName})
 
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.payload}
