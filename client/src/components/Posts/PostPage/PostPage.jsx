@@ -71,7 +71,7 @@ export const PostPage = (props) => {
     };
 
     return <Container maxWidth="lg" style={{marginTop: 90}}>
-        {props.alert && <CustomizedSnackbars />}
+        {props.alert && <CustomizedSnackbars/>}
         <Card className={classes.root}>
             <CardHeader
                 action={
@@ -84,7 +84,7 @@ export const PostPage = (props) => {
                 title={title}
                 subheader={`Добавленно: ${date.substring(11, 19)}, ${date.substring(0, 10)}`}
             />
-            {(props.role==='admin')&&(<div style={{display: 'flex', justifyContent: 'center', margin:20}}>
+            {(props.role === 'admin') && (<div style={{display: 'flex', justifyContent: 'center', margin: 20}}>
                 <Button variant="contained" color="secondary" onClick={props.deletePost}>
                     Удалить негодный!
                 </Button>
@@ -97,8 +97,10 @@ export const PostPage = (props) => {
                 {images.map(image => {
                     return (
                         <div>
-                            <Typography variant="body1" color="initial"
-                                        component="p">{fullPostText[images.indexOf(image)]}</Typography>
+                            <div style={{backgroundColor: "#eeeeee", padding: '10px'}}>
+                                <Typography variant="body1" color="initial"
+                                            component="p">{fullPostText[images.indexOf(image)]}</Typography>
+                            </div>
                             <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
                                 <img alt={title} src={image} style={{maxWidth: '100%'}}/>
                             </div>

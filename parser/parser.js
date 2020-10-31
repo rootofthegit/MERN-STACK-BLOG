@@ -78,26 +78,25 @@ async function getDetails(url) {
             fullPostText.push(text)
         }
     })
-    $('.paragraph p').each((i, el) => {
+    $('.paragraph p.item-title').each((i, el) => {
         const text = $(el).text().trim()
         if (text !== '') {
             fullPostText.push(text)
         }
     })
-    $('.gallery p').each((i, el) => {
+    $('.gallery p.item-title').each((i, el) => {
         const text = $(el).text().trim()
         if (text !== '') {
             fullPostText.push(text)
         }
     })
 
-
-    $('.paragraph img').each((i, el) => {
+    $('.paragraph img.post-pic-inline').each((i, el) => {
         const img = $(el);
         photos.push('https://fishki.net' + img.attr('src'));
     });
 
-    $('.gallery img').each((i, el) => {
+    $('.gallery img.post-pic-inline').each((i, el) => {
         const img = $(el);
         photos.push(img.attr('src'));
     });

@@ -366,14 +366,6 @@ export const NavBar = (props) => {
                         <ListItemIcon><Subject color="inherit"/></ListItemIcon>
                         <ListItemText primary="Истории"/>
                     </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('demotivation', 'Демотиваторы'))}>
-                        <ListItemIcon><Wallpaper color="inherit"/></ListItemIcon>
-                        <ListItemText primary="Демотиваторы"/>
-                    </ListItem>
-                    <ListItem button onClick={() => (props.categoryChoosingHandler('anekdot', 'Анекдоты'))}>
-                        <ListItemIcon><Reddit color="inherit"/></ListItemIcon>
-                        <ListItemText primary="Анекдоты"/>
-                    </ListItem>
                     <ListItem button
                               onClick={() => (props.categoryChoosingHandler('FunnyPictures', 'Смешные картинки'))}>
                         <ListItemIcon><ImageSearch color="inherit"/></ListItemIcon>

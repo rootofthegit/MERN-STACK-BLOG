@@ -67,8 +67,6 @@ export default function Parsing(props) {
                         <FormControlLabel value="jumor" control={<Radio />} label="Юмор" />
                         <FormControlLabel value="photo" control={<Radio />} label="Фото" />
                         <FormControlLabel value="stories" control={<Radio />} label="Истории" />
-                        <FormControlLabel value="demotivation" control={<Radio />} label="Демотиваторы" />
-                        <FormControlLabel value="anekdot" control={<Radio />} label="Анекдоты" />
                         <FormControlLabel value="FunnyPictures" control={<Radio />} label="Смешные картинки" />
                         <FormControlLabel value="animals" control={<Radio />} label="Животные" />
                         <FormControlLabel value="wildNature" control={<Radio />} label="Дикая природа" />
