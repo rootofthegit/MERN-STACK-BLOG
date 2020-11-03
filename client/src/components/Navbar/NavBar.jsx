@@ -13,9 +13,9 @@ import {
     EmojiNature,
     FiberNew, ImageSearch,
     InsertEmoticon, Pets,
-    PostAdd, Reddit,
+    PostAdd,
     SpeakerNotes, SportsKabaddi, SportsTennis,
-    Star, Subject, Wallpaper
+    Star, Subject
 } from "@material-ui/icons";
 import MonochromePhotosIcon from '@material-ui/icons/MonochromePhotos';
 import {NavLink, useHistory} from "react-router-dom";
@@ -23,8 +23,6 @@ import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MoreIcon from '@material-ui/icons/MoreVert';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import {AuthContext} from "../../context/AuthContext"
 import MenuIcon from '@material-ui/icons/Menu';

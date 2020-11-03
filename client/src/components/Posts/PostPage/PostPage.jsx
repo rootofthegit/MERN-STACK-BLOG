@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {DeleteForever, Facebook, FavoriteBorder, LinkedIn, Reply, Twitter} from "@material-ui/icons";
+import {Facebook, FavoriteBorder, LinkedIn, Reply, Twitter} from "@material-ui/icons";
 import {useHistory} from 'react-router-dom'
 import Badge from "@material-ui/core/Badge";
 import TextField from "@material-ui/core/TextField";

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from '@material-ui/icons/Share';
 import {Comment, Facebook, FavoriteBorder, LinkedIn, Twitter} from "@material-ui/icons";
-import {useHistory} from "react-router-dom"
+import {NavLink, useHistory} from "react-router-dom"
 import Badge from "@material-ui/core/Badge";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Popover from "@material-ui/core/Popover";
@@ -19,7 +19,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CardHeader from "@material-ui/core/CardHeader";
-import CustomizedSnackbars from "../../Alerts/Alert";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -117,32 +117,25 @@ export const PostCard = (props) => {
                         <ListItem
                             button
                             selected={selectedIndex === 0}
-                            onClick={(event) => handleListItemClick(event, 0)}
-                        >
-                            <ListItemIcon>
-                                <LinkedIn color="primary"/>
-                            </ListItemIcon>
-                            <ListItemText primary="LinkedIn" />
-                        </ListItem>
-                        <ListItem
-                            button
-                            selected={selectedIndex === 0}
-                            onClick={(event) => handleListItemClick(event, 0)}
+
                         >
                             <ListItemIcon>
                                 <Twitter color="primary"/>
                             </ListItemIcon>
-                            <ListItemText primary="Twitter" />
+                            <a href={`http://www.twitter.com/intent/tweet?url=http://prikol.fun/posts/${props.postId}`} target="_blank">Twitter</a>
+
                         </ListItem>
+
                         <ListItem
                             button
                             selected={selectedIndex === 1}
-                            onClick={(event) => handleListItemClick(event, 1)}
+
                         >
                             <ListItemIcon>
                                 <Facebook color="primary"/>
                             </ListItemIcon>
-                            <ListItemText primary="Facebook" />
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=http://prikol.fun/posts/${props.postId}`} target="_blank">Facebook</a>
+
                         </ListItem>
                     </List>
                 </Popover>

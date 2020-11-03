@@ -42,7 +42,6 @@ export function getPostById(postId) {
         try {
             const responseById = await fetch(`/api/posts/byid/${postId}`)
             const post = await responseById.json()
-            console.log(post)
             dispatch({type: GET_POST_BY_ID, payload: post})
         } catch (e) {
             console.log("get posts request failed")

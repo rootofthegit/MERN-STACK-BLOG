@@ -6,9 +6,6 @@ import {Footer} from "../../Footer/Footer";
 import PostCardContainer from "../PostCard/PostCardContainer";
 import CustomizedSnackbars from "../../Alerts/Alert";
 import Typography from "@material-ui/core/Typography";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import Rating from "@material-ui/lab/Rating";
 import HoverRating from "../../RatingStars/rating";
 
 export const PostsPage = ({posts, alert, categoryName}) => {
