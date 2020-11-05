@@ -23,6 +23,7 @@ const PostsPageContainer = ({posts, alert, currentPage, categoryName}) => {
 
     useEffect(() => {
         fetchPosts()
+        window.scrollTo(0, 0);
     }, [fetchPosts])
 
     if (loading) {

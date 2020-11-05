@@ -22,6 +22,7 @@ const CategoryPageContainer = ({posts, alert, categoryName}) => {
 
     useEffect(() => {
         fetchUserData()
+        window.scrollTo(0, 0);
     }, [fetchUserData])
 
     if (loading) {

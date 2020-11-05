@@ -9,15 +9,14 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from '@material-ui/icons/Share';
-import {Comment, Facebook, FavoriteBorder, LinkedIn, Twitter} from "@material-ui/icons";
-import {NavLink, useHistory} from "react-router-dom"
+import {Comment, Facebook, FavoriteBorder, Twitter} from "@material-ui/icons";
+import {useHistory} from "react-router-dom"
 import Badge from "@material-ui/core/Badge";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Popover from "@material-ui/core/Popover";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import CardHeader from "@material-ui/core/CardHeader";
 
 
@@ -57,9 +56,6 @@ export const PostCard = (props) => {
 
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-    const handleListItemClick = (event, index) => {
-        setSelectedIndex(index);
-    };
 
     return (
         <Card className={classes.root}>

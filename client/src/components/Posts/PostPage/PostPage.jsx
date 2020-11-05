@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -22,6 +22,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Popover from "@material-ui/core/Popover";
 import CustomizedSnackbars from "../../Alerts/Alert";
+import { useLocation } from "react-router-dom";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +71,11 @@ export const PostPage = (props) => {
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
     };
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     return <Container maxWidth="lg" style={{marginTop: 90}}>
         {props.alert && <CustomizedSnackbars/>}

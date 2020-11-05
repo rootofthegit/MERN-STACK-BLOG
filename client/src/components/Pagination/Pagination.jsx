@@ -21,6 +21,7 @@ function BasicPagination(props) {
     const handleChange = (event, value) => {
         props.setCurrentPage(value)
         !!props.category?props.getPostsByCategory(props.category, categoryName, value):props.getPosts(value)
+        window.scrollTo(0, 0);
     };
 
     return (
